@@ -6,7 +6,7 @@ Authors@R:
            family = "Parker",
            role = c("aut", "cre"),
            email = "philip.parker@acu.edu.au",
-           comment = c(ORCID = "0000-0002-4604-8566"))
+           comment = c(ORCID = "0000-0002-4604-8566")),
     person(given = "Timothy",
            family = "Churches",
            role = c("aut"),
@@ -16,6 +16,7 @@ Authors@R:
 Description: This pakage aims to provides access for reading and writing to cloudstor via their webDav API.
 License: GPL-3
 Suggests: 
+    rstudioapi,
     testthat
 Encoding: UTF-8
 LazyData: true
