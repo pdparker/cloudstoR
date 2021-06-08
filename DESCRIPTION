@@ -1,0 +1,29 @@
+Package: cloudstoR
+Title: Simplifies access to cloudstor api.
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Philip",
+           family = "Parker",
+           role = c("aut", "cre"),
+           email = "philip.parker@acu.edu.au",
+           comment = c(ORCID = "0000-0002-4604-8566"))
+    person(given = "Timothy",
+           family = "Churches",
+           role = c("aut"),
+           email = "",
+           comment = c(ORCID = ""))
+           )
+Description: This pakage aims to provides access for reading and writing to cloudstor via their webDav API.
+License: GPL-3
+Suggests: 
+    testthat
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    readit,
+    XML,
+    utils,
+    curl,
+    httr
