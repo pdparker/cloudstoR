@@ -4,7 +4,7 @@
 \name{cloudstoR-package}
 \alias{cloudstoR}
 \alias{cloudstoR-package}
-\title{cloudstoR: Simplifies access to cloudstor api.}
+\title{cloudstoR: Simplifies access to cloudstor api}
 \description{
 This pakage aims to provides access for reading and writing to cloudstor via their webDav API.
 }
