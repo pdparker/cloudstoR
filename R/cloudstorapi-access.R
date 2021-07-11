@@ -103,7 +103,7 @@ cloud_meta <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_
     })
   )
   size <- unlist(
-    XML::xpathApply(doc, "//d:quota-used-bytes", function(node) {
+    XML::xpathApply(doc, "//d:getcontentlength", function(node) {
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed=TRUE)
     })
   )
