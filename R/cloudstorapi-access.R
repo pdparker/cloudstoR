@@ -63,6 +63,8 @@ cloud_list <- function(path = "",
 
 #' cloud_get
 #'
+#' Download a file from a cloudstor folder and open it in R.
+#'
 #' @param path path to file or folder
 #' @param user cloudstor user name
 #' @param password cloudstor password
@@ -88,6 +90,8 @@ cloud_get <- function(path = "",
 
 
 #' cloud_put
+#'
+#' Save a file to cloudstor.
 #'
 #' @param file_name What you want to call the file on cloudstor
 #' @param local_file Where the file is located
@@ -115,6 +119,8 @@ cloud_put <- function(file_name,
 
 
 #' cloud_meta
+#'
+#' Return a data.frame of the metadata for a file or folder
 #'
 #' @param path path to file or folder
 #' @param user Your cloudstor username
