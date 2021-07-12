@@ -102,11 +102,14 @@ cloud_meta <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed=TRUE)
     })
   )
-  size <- unlist(
-    XML::xpathApply(doc, "//d:getcontentlength", function(node) {
-      sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed=TRUE)
-    })
-  )
+  size <- XML::xpathApply(doc, "//d:response", function(node) {
+    contentlength <- unlist(XML::xmlValue(
+      node[["propstat"]][["prop"]][["getcontentlength"]]))
+    quotaused <- unlist(XML::xmlValue(
+      node[["propstat"]][["prop"]][["quota-used-bytes"]]))
+    # If no content length, use quota used
+    vals <- ifelse(is.na(contentlength), quotaused, contentlength)
+    vals})
   tag <- unlist(
     XML::xpathApply(doc, "//d:getetag", function(node) {
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed=TRUE)
