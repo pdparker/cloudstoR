@@ -2,10 +2,11 @@
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.cloudstoR <- list(
-    cloudstoR.cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
+    cloudstoR.cloud_address =
+      "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
   )
   toset <- !(names(op.cloudstoR) %in% names(op))
-  if(any(toset)) options(op.cloudstoR[toset])
+  if (any(toset)) options(op.cloudstoR[toset])
 
   invisible()
 }
@@ -34,7 +35,9 @@ get_cloud_address <- function(path) {
 #' @export
 #'
 #' @examples
-cloud_list <- function(path = "", user = cloud_auth_user(), password = cloud_auth_pwd()) {
+cloud_list <- function(path = "",
+                       user = cloud_auth_user(),
+                       password = cloud_auth_pwd()) {
   cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
@@ -46,7 +49,10 @@ cloud_list <- function(path = "", user = cloud_auth_user(), password = cloud_aut
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(uri, "/")[[1]][-1:-3], sep = "", collapse = ""), "/", sep = "")
+  base <- paste(paste("/", strsplit(uri, "/")[[1]][-1:-3],
+    sep = "",
+    collapse = ""
+  ), "/", sep = "")
   result <- unlist(
     XML::xpathApply(doc, "//d:response/d:href", function(node) {
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed = TRUE)
@@ -66,7 +72,10 @@ cloud_list <- function(path = "", user = cloud_auth_user(), password = cloud_aut
 #' @export
 #'
 #' @examples
-cloud_get <- function(path = "", user = cloud_auth_user(), password = cloud_auth_pwd(), dest) {
+cloud_get <- function(path = "",
+                      user = cloud_auth_user(),
+                      password = cloud_auth_pwd(),
+                      dest) {
   cloud_address <- get_cloud_address(path)
   p <- file.path(tempdir(), dest)
   h <- curl::new_handle()
@@ -90,11 +99,18 @@ cloud_get <- function(path = "", user = cloud_auth_user(), password = cloud_auth
 #' @export
 #'
 #' @examples
-cloud_put <- function(file_name, local_file, path = "", user = cloud_auth_user(), password = cloud_auth_pwd()) {
+cloud_put <- function(file_name,
+                      local_file,
+                      path = "",
+                      user = cloud_auth_user(),
+                      password = cloud_auth_pwd()) {
   cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(file.path(cloud_address, file_name))
   in_path <- path.expand(local_file)
-  httr::PUT(uri, body = httr::upload_file(in_path), config = httr::authenticate(user, password))
+  httr::PUT(uri,
+    body = httr::upload_file(in_path),
+    config = httr::authenticate(user, password)
+  )
 }
 
 
@@ -108,7 +124,9 @@ cloud_put <- function(file_name, local_file, path = "", user = cloud_auth_user()
 #' @export
 #'
 #' @examples
-cloud_meta <- function(path = "", user = cloud_auth_user(), password = cloud_auth_pwd()) {
+cloud_meta <- function(path = "",
+                       user = cloud_auth_user(),
+                       password = cloud_auth_pwd()) {
   cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
@@ -120,7 +138,10 @@ cloud_meta <- function(path = "", user = cloud_auth_user(), password = cloud_aut
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(uri, "/")[[1]][-1:-3], sep = "", collapse = ""), "/", sep = "")
+  base <- paste(paste("/", strsplit(uri, "/")[[1]][-1:-3],
+    sep = "",
+    collapse = ""
+  ), "/", sep = "")
   files <- unlist(
     XML::xpathApply(doc, "//d:response/d:href", function(node) {
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed = TRUE)

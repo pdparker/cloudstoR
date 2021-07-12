@@ -20,15 +20,23 @@ cloud_auth <- function(reset_keys = FALSE) {
 
   cli::cli_div(theme = list(span.emph = list(color = "orange")))
   cli::cli_text(
-    "cloudstoR will save your credentials to your device using {.pkg keyring}. You can read about keyring here: {.url https://cran.r-project.org/web/packages/keyring/index.html}"
+    "cloudstoR will save your credentials to your device using ",
+    "{.pkg keyring}. You can read about keyring here: ",
+    "{.url https://cran.r-project.org/web/packages/keyring/index.html}"
   )
   cli::cli_text(
-    "You should use an {.emph App Password} for authentication. For details about app passwords, see {.url https://support.aarnet.edu.au/hc/en-us/articles/236034707-How-do-I-manage-change-my-passwords-}"
+    "You should use an {.emph App Password} for authentication. ",
+    "For details about app passwords, see ",
+    "{.url https://support.aarnet.edu.au/hc/en-us/articles/",
+    "236034707-How-do-I-manage-change-my-passwords-}"
   )
   cli::cli_end()
 
   if (utils::menu(c("Yes", "No"), title = "Proceed?") == 2) {
-    stop("Not storing credentials. Please provide arguements to username and password.")
+    stop(
+      "Not storing credentials. ",
+      "Please provide arguements to username and password."
+    )
   }
 
   # Get username
