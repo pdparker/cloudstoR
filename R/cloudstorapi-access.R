@@ -1,4 +1,24 @@
 
+.onLoad <- function(libname, pkgname) {
+  op <- options()
+  op.cloudstoR <- list(
+    cloudstoR.cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
+  )
+  invisible()
+}
+
+#' get_cloud_address
+#'
+#' Return the full cloud_address path. Not a user facing function.
+#' @return
+#'
+#' @examples
+#'
+get_cloud_address <- function(path) {
+  cloud_address <- paste0(getOption("cloudstoR.cloud_address",path))
+  return(cloud_address)
+}
+
 #' cloud_list
 #'
 #' @param user cloudstor user name
@@ -9,7 +29,8 @@
 #' @export
 #'
 #' @examples
-cloud_list <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/") {
+cloud_list <- function(path="", user=cloud_auth_user(), password=cloud_auth_pwd()) {
+  cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
   h <- curl::new_handle()
@@ -40,7 +61,8 @@ cloud_list <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_
 #' @export
 #'
 #' @examples
-cloud_get <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_address, dest){
+cloud_get <- function(path="", user=cloud_auth_user(), password=cloud_auth_pwd(), dest){
+  cloud_address <- get_cloud_address(path)
   p = file.path(tempdir(), dest)
   h = curl::new_handle()
   curl::handle_setopt(h, username = user)
@@ -63,7 +85,8 @@ cloud_get <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_a
 #' @export
 #'
 #' @examples
-cloud_put <- function(file_name, local_file, user=cloud_auth_user(), password=cloud_auth_pwd(),  cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/") {
+cloud_put <- function(file_name, local_file, user=cloud_auth_user(), path="", user=cloud_auth_user(), password=cloud_auth_pwd()) {
+  cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(file.path(cloud_address, file_name))
   in_path = path.expand(local_file)
   httr::PUT(uri, body = httr::upload_file(in_path), config = httr::authenticate(user, password))
@@ -80,7 +103,8 @@ cloud_put <- function(file_name, local_file, user=cloud_auth_user(), password=cl
 #' @export
 #'
 #' @examples
-cloud_meta <- function(user=cloud_auth_user(), password=cloud_auth_pwd(), cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/") {
+cloud_meta <- function(path="", user=cloud_auth_user(), password=cloud_auth_pwd()) {
+  cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
   h <- curl::new_handle()
