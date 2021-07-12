@@ -158,7 +158,7 @@ cloud_meta <- function(path = "",
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed = TRUE)
     })
   )
-  size <- XML::xpathApply(doc, "//d:response", function(node) {
+  size <- unlist(XML::xpathApply(doc, "//d:response", function(node) {
     contentlength <- unlist(XML::xmlValue(
       node[["propstat"]][["prop"]][["getcontentlength"]]
     ))
@@ -168,7 +168,7 @@ cloud_meta <- function(path = "",
     # If no content length, use quota used
     vals <- ifelse(is.na(contentlength), quotaused, contentlength)
     vals
-  })
+  }))
   tag <- unlist(
     XML::xpathApply(doc, "//d:getetag", function(node) {
       sub(base, "", utils::URLdecode(XML::xmlValue(node)), fixed = TRUE)

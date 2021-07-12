@@ -24,5 +24,5 @@ cloud_get(
 
 }
 \description{
-cloud_get
+Download a file from a cloudstor folder and open it in R.
 }

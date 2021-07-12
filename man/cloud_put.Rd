@@ -27,5 +27,5 @@ cloud_put(
 
 }
 \description{
-cloud_put
+Save a file to cloudstor.
 }

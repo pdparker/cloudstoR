@@ -17,5 +17,5 @@ cloud_meta(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 
 }
 \description{
-cloud_meta
+Return a data.frame of the metadata for a file or folder
 }
