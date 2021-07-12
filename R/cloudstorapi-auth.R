@@ -36,7 +36,9 @@ cloud_auth <- function(reset_keys = FALSE) {
     password = readline("What is your CloudStor email address?")
   )
   # Get password
-  keyring::key_set_with_value("CLOUDSTOR_PWD", password = getPass::getPass(msg = "Password/Token"))
+  keyring::key_set_with_value("CLOUDSTOR_PWD",
+    password = getPass::getPass(msg = "Password/Token")
+  )
 
   cli::cli_alert_success("Credentials stored.")
 }
@@ -49,7 +51,6 @@ cloud_auth <- function(reset_keys = FALSE) {
 #' @return
 #'
 #' @examples
-#'
 cloud_auth_user <- function() {
   if (!"CLOUDSTOR_USER" %in% keyring::key_list()$service) {
     cloud_auth()
@@ -64,7 +65,6 @@ cloud_auth_user <- function() {
 #' @return
 #'
 #' @examples
-#'
 cloud_auth_pwd <- function() {
   if (!"CLOUDSTOR_PWD" %in% keyring::key_list()$service) {
     cloud_auth()

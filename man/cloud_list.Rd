@@ -4,18 +4,14 @@
 \alias{cloud_list}
 \title{cloud_list}
 \usage{
-cloud_list(
-  user = cloud_auth_user(),
-  password = cloud_auth_pwd(),
-  cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
-)
+cloud_list(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 }
 \arguments{
+\item{path}{path to file or folder}
+
 \item{user}{cloudstor user name}
 
 \item{password}{cloudstor password}
-
-\item{cloud_address}{the cloudstor webdav address to your file/folder of interest}
 }
 \value{
 

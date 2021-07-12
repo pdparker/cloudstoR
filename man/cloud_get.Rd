@@ -5,18 +5,18 @@
 \title{cloud_get}
 \usage{
 cloud_get(
+  path = "",
   user = cloud_auth_user(),
   password = cloud_auth_pwd(),
-  cloud_address,
   dest
 )
 }
 \arguments{
+\item{path}{path to file or folder}
+
 \item{user}{cloudstor user name}
 
 \item{password}{cloudstor password}
-
-\item{cloud_address}{cloudstor webDav address to file of interest}
 
 \item{dest}{destination for saving the file}
 }

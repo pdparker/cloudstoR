@@ -4,18 +4,14 @@
 \alias{cloud_meta}
 \title{cloud_meta}
 \usage{
-cloud_meta(
-  user = cloud_auth_user(),
-  password = cloud_auth_pwd(),
-  cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
-)
+cloud_meta(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 }
 \arguments{
+\item{path}{path to file or folder}
+
 \item{user}{Your cloudstor username}
 
 \item{password}{Your cloudstor password}
-
-\item{cloud_address}{cloudstor webDav address to the location you want to save on cloudstor}
 }
 \value{
 
