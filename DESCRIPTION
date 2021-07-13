@@ -22,7 +22,8 @@ Description: This pakage aims to provides access for reading and writing to clou
 License: GPL-3 + file LICENSE
 Suggests: 
     rstudioapi,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    mockery
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
