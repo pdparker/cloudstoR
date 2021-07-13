@@ -103,21 +103,27 @@ cloud_list <- function(path = "",
 #' @param user cloudstor user name
 #' @param password cloudstor password
 #' @param dest destination for saving the file
+#' @param open_file if TRUE, open the file using rio. Else, returns the file path
 #'
 #' @return
 #' @export
 #'
 #' @examples
 cloud_get <- function(path = "",
+                      dest,
                       user = cloud_auth_user(),
                       password = cloud_auth_pwd(),
-                      dest) {
+                      open_file = TRUE) {
   cloud_address <- get_cloud_address(path)
   p <- file.path(tempdir(), dest)
   h <- get_handle(user, password)
   curl::curl_download(cloud_address, p, handle = h)
-  d <- readit::readit(p)
-  return(d)
+  if (open_file) {
+    d <- rio::import(p)
+    return(d)
+  } else {
+    return(p)
+  }
 }
 
 

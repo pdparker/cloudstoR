@@ -34,7 +34,7 @@ Imports:
     getPass,
     httr,
     keyring,
-    readit,
+    rio,
     utils,
     XML
 Config/testthat/edition: 3

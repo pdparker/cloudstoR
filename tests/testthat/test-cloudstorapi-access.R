@@ -20,8 +20,10 @@ test_that("Generate URLs", {
 # cloud_list
 
 test_that("Returns correct list", {
-  exp_res <- c("BelongingProject/", "Documents/", "Photos/",
-               "Shared/", "iPLAY Data/")
+  exp_res <- c(
+    "BelongingProject/", "Documents/", "Photos/",
+    "Shared/", "iPLAY Data/"
+  )
 
   # Skip credentials
   stub(cloud_list, "cloud_auth_user", NULL)
