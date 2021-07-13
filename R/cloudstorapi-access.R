@@ -55,6 +55,8 @@ get_handle <- function(user, password, reset = FALSE) {
     h <- get("handle", envir = cloudstoR.env)
     # Ensure password is reset to NULL
     curl::handle_setopt(h, password = NULL)
+    # Remove custom request if present
+    curl::handle_setopt(h, customrequest = NULL)
   }
   return(h)
 }
