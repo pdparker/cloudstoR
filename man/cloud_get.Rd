@@ -6,19 +6,22 @@
 \usage{
 cloud_get(
   path = "",
+  dest,
   user = cloud_auth_user(),
   password = cloud_auth_pwd(),
-  dest
+  open_file = TRUE
 )
 }
 \arguments{
 \item{path}{path to file or folder}
 
+\item{dest}{destination for saving the file}
+
 \item{user}{cloudstor user name}
 
 \item{password}{cloudstor password}
 
-\item{dest}{destination for saving the file}
+\item{open_file}{if TRUE, open the file using rio. Else, returns the file path}
 }
 \value{
 
