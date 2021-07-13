@@ -35,8 +35,8 @@ cloudstoR provides an option to store these credentials using
 ``` r
 library(cloudstoR)
 ## basic example code
-my_data = cloud_get(dest = 'mydata.sav',
-                    cloud_address = 'https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/mydata.sav')
+my_data = cloud_get(path = 'mydata.sav',
+                    dest = 'mydata.sav')
 ```
 
 Note that calling any of the `cloud_*` functions without a username or
@@ -44,23 +44,23 @@ password prompts cloudstoR to store your credentials locally. You can
 choose not to do this by providing a username and password.
 
 ``` r
-my_data = cloud_get(username = cloudstor_username,
+my_data = cloud_get(path = 'mydata.sav',
+                    username = cloudstor_username,
                     password = cloudstor_appPassword,
-                    dest = 'mydata.sav',
-                    cloud_address = 'https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/mydata.sav')
+                    dest = 'mydata.sav')
 ```
 
 ### Getting a list of files
 
 ``` r
-cloud_list(cloud_address = 'https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/additional/path/to/folder')
+cloud_list(path = 'additional/path/to/folder')
 ```
 
 ### Getting a specific file
 
 ``` r
-my_data = cloud_get(dest = 'mydata.sav',
-                    cloud_address = 'https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/mydata.sav')
+my_data = cloud_get(path = 'mydata.sav',
+                    dest = 'mydata.sav')                    )
 ```
 
 ### Saving a file to Cloudstor
@@ -68,7 +68,7 @@ my_data = cloud_get(dest = 'mydata.sav',
 ``` r
 cloud_put(file_name = 'mydata.sav',
           local_file = '~/datatosave.sav',
-          cloud_address = 'https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/additional/path/to/folder')
+          path = 'additional/path/to/folder')
 ```
 
 ### Updating credentials
@@ -78,4 +78,18 @@ app password), you can restore them by calling `cloud_auth()` directly:
 
 ``` r
 cloud_auth(reset_keys=TRUE)
+```
+
+### Using an alternative webdav address
+
+The default webdav address is
+`https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/`. If your
+organisation uses a different address, you can set this globally at the
+top of your script:
+
+``` r
+# Set the global webdav address
+options(cloudstoR.cloud_address = "https:://my.webdav.address")
+# Check the current value
+getOption("cloudstoR.cloud_address")
 ```

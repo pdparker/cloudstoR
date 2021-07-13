@@ -1,5 +1,8 @@
+# Create a package environment
+cloudstoR.env <- new.env(parent = emptyenv())
 
 .onLoad <- function(libname, pkgname) {
+  # Set default cloud_address
   op <- options()
   op.cloudstoR <- list(
     cloudstoR.cloud_address =
@@ -7,6 +10,8 @@
   )
   toset <- !(names(op.cloudstoR) %in% names(op))
   if (any(toset)) options(op.cloudstoR[toset])
+
+  assign("authenticated", FALSE, cloudstoR.env)
 
   invisible()
 }
@@ -21,8 +26,37 @@
 #'
 #' @examples
 get_cloud_address <- function(path) {
-  cloud_address <- paste0(getOption("cloudstoR.cloud_address", path))
+  cloud_address <- paste0(getOption("cloudstoR.cloud_address"), path)
   return(cloud_address)
+}
+
+#' get_handle
+#'
+#' Return a handle for CURL to use. Not a user facing function
+#'
+#' @param user cloudstor username
+#' @param password cloudstor password
+#' @param reset remove the existing authentication and handle
+#'
+#' @return curl handle object
+#'
+#' @examples
+get_handle <- function(user, password, reset = FALSE) {
+  # If not authenticated or reset
+  if (!get("authenticated", envir = cloudstoR.env) | reset) {
+    h <- curl::new_handle(failonerror = TRUE)
+    curl::handle_setopt(h, username = user)
+    curl::handle_setopt(h, password = password)
+
+    # Save the handle
+    assign("handle", h, cloudstoR.env)
+    assign("authenticated", TRUE, cloudstoR.env)
+  } else {
+    h <- get("handle", envir = cloudstoR.env)
+    # Ensure password is reset to NULL
+    curl::handle_setopt(h, password = NULL)
+  }
+  return(h)
 }
 
 #' cloud_list
@@ -41,10 +75,8 @@ cloud_list <- function(path = "",
   cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
-  h <- curl::new_handle()
+  h <- get_handle(user, password)
   curl::handle_setopt(h, customrequest = "PROPFIND")
-  curl::handle_setopt(h, username = user)
-  curl::handle_setopt(h, password = password)
   response <- curl::curl_fetch_memory(uri, h)
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
@@ -80,9 +112,7 @@ cloud_get <- function(path = "",
                       dest) {
   cloud_address <- get_cloud_address(path)
   p <- file.path(tempdir(), dest)
-  h <- curl::new_handle()
-  curl::handle_setopt(h, username = user)
-  curl::handle_setopt(h, password = password)
+  h <- get_handle(user, password)
   curl::curl_download(cloud_address, p, handle = h)
   d <- readit::readit(p)
   return(d)
@@ -136,10 +166,8 @@ cloud_meta <- function(path = "",
   cloud_address <- get_cloud_address(path)
   uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
-  h <- curl::new_handle()
+  h <- get_handle(user, password)
   curl::handle_setopt(h, customrequest = "PROPFIND")
-  curl::handle_setopt(h, username = user)
-  curl::handle_setopt(h, password = password)
   response <- curl::curl_fetch_memory(uri, h)
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
