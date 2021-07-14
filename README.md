@@ -14,12 +14,18 @@ The goal of cloudstoR is to …
 
 ## Installation
 
-You can install the development version from
-[GitHub](https://github.com/) with:
+You can install from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("pdparker/cloudstoR")
+```
+
+Or install the development version with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("pdparker/cloudstoR", ref = "dev")
 ```
 
 ## Setup
