@@ -13,6 +13,3 @@ cloud_auth_pwd()
 Used to return a stored cloudstor password, or request the user set one.
 Not a user-facing function.
 }
-\examples{
-
-}

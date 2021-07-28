@@ -2,14 +2,14 @@
 % Please edit documentation in R/cloudstorapi-access.R
 \name{cloud_put}
 \alias{cloud_put}
-\title{Title}
+\title{cloud_put}
 \usage{
 cloud_put(
   file_name,
   local_file,
+  path = "",
   user = cloud_auth_user(),
-  password = cloud_auth_pwd(),
-  cloud_address = "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
+  password = cloud_auth_pwd()
 )
 }
 \arguments{
@@ -17,15 +17,15 @@ cloud_put(
 
 \item{local_file}{Where the file is located}
 
+\item{path}{path to file or folder}
+
 \item{user}{Your cloudstor username}
 
 \item{password}{Your cloudstor password}
-
-\item{cloud_address}{cloudstor webDav address to the location you want to save on cloudstor}
 }
 \value{
 
 }
 \description{
-Title
+Save a file to cloudstor.
 }
