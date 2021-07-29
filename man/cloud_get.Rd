@@ -5,8 +5,8 @@
 \title{cloud_get}
 \usage{
 cloud_get(
-  path = "",
-  dest,
+  path,
+  dest = basename(path),
   user = cloud_auth_user(),
   password = cloud_auth_pwd(),
   open_file = TRUE

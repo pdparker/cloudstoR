@@ -27,6 +27,7 @@ cloudstoR.env <- new.env(parent = emptyenv())
 #' @examples
 get_cloud_address <- function(path) {
   cloud_address <- paste0(getOption("cloudstoR.cloud_address"), path)
+  cloud_address <- utils::URLencode(cloud_address)
   return(cloud_address)
 }
 
@@ -75,15 +76,14 @@ cloud_list <- function(path = "",
                        user = cloud_auth_user(),
                        password = cloud_auth_pwd()) {
   cloud_address <- get_cloud_address(path)
-  uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
   h <- get_handle(user, password)
   curl::handle_setopt(h, customrequest = "PROPFIND")
-  response <- curl::curl_fetch_memory(uri, h)
+  response <- curl::curl_fetch_memory(cloud_address)
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(uri, "/")[[1]][-1:-3],
+  base <- paste(paste("/", strsplit(cloud_address, "/")[[1]][-1:-3],
     sep = "",
     collapse = ""
   ), "/", sep = "")
@@ -146,10 +146,9 @@ cloud_put <- function(file_name,
                       path = "",
                       user = cloud_auth_user(),
                       password = cloud_auth_pwd()) {
-  cloud_address <- get_cloud_address(path)
-  uri <- utils::URLencode(file.path(cloud_address, file_name))
+  cloud_address <- get_cloud_address(file.path(path,file_name))
   in_path <- path.expand(local_file)
-  httr::PUT(uri,
+  httr::PUT(cloud_address,
     body = httr::upload_file(in_path),
     config = httr::authenticate(user, password)
   )
@@ -172,15 +171,14 @@ cloud_meta <- function(path = "",
                        user = cloud_auth_user(),
                        password = cloud_auth_pwd()) {
   cloud_address <- get_cloud_address(path)
-  uri <- utils::URLencode(cloud_address)
   # fetch directory listing via curl and parse XML response
   h <- get_handle(user, password)
   curl::handle_setopt(h, customrequest = "PROPFIND")
-  response <- curl::curl_fetch_memory(uri, h)
+  response <- curl::curl_fetch_memory(cloud_address, h)
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(uri, "/")[[1]][-1:-3],
+  base <- paste(paste("/", strsplit(cloud_address, "/")[[1]][-1:-3],
     sep = "",
     collapse = ""
   ), "/", sep = "")
