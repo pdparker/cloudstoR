@@ -79,7 +79,7 @@ cloud_list <- function(path = "",
   # fetch directory listing via curl and parse XML response
   h <- get_handle(user, password)
   curl::handle_setopt(h, customrequest = "PROPFIND")
-  response <- curl::curl_fetch_memory(cloud_address)
+  response <- curl::curl_fetch_memory(cloud_address, h)
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
