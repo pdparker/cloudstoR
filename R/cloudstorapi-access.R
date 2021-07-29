@@ -109,8 +109,8 @@ cloud_list <- function(path = "",
 #' @export
 #'
 #' @examples
-cloud_get <- function(path = "",
-                      dest,
+cloud_get <- function(path,
+                      dest = basename(path),
                       user = cloud_auth_user(),
                       password = cloud_auth_pwd(),
                       open_file = TRUE) {
