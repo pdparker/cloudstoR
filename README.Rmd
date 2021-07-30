@@ -71,7 +71,6 @@ my_data = cloud_get(path = 'mydata.sav')
 
 Note that `cloudstoR` will try to open the file using [`rio`](https://github.com/leeper/rio) and return a data.frame. If you want to use a different package to open the file, or you just want to download the file without opening it, set `open_file = FALSE` to return a file path instead.
 
-
 ```{r, eval=FALSE}
 my_path = cloud_get(path = 'mydata.sav',
                     open_file = FALSE)
