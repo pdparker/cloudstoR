@@ -97,7 +97,8 @@ cloud_list <- function(path = "",
 
 #' cloud_get
 #'
-#' Download a file from a cloudstor folder and open it in R.
+#' Download a file from a cloudstor folder. The file is opened
+#' and read into R using rio, or optionally the file path is returned.
 #'
 #' @param path path to file or folder
 #' @param user cloudstor user name

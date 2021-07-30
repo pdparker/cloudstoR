@@ -27,5 +27,6 @@ cloud_get(
 
 }
 \description{
-Download a file from a cloudstor folder and open it in R.
+Download a file from a cloudstor folder. The file is opened
+and read into R using rio, or optionally the file path is returned.
 }
