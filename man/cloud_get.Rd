@@ -24,7 +24,7 @@ cloud_get(
 \item{open_file}{if TRUE, open the file using rio. Else, returns the file path}
 }
 \value{
-
+the file object or folder path, depending on open_file
 }
 \description{
 Download a file from a cloudstor folder. The file is opened

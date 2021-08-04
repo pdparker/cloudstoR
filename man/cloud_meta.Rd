@@ -14,7 +14,7 @@ cloud_meta(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 \item{password}{Your cloudstor password}
 }
 \value{
-
+a data.frame of the file and folder metadata
 }
 \description{
 Return a data.frame of the metadata for a file or folder

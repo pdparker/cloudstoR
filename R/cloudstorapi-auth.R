@@ -4,7 +4,7 @@
 #'
 #' @param reset_keys override existing keys
 #'
-#' @return
+#' @return Nothing. Keys are stored in Keyring.
 #' @export
 #'
 #' @examples
@@ -56,7 +56,7 @@ cloud_auth <- function(reset_keys = FALSE) {
 #'
 #' Used to return a stored cloudstor username, or request the user set one.
 #' Not a user-facing function.
-#' @return
+#' @return user id as string.
 #'
 #' @examples
 cloud_auth_user <- function() {
@@ -70,7 +70,7 @@ cloud_auth_user <- function() {
 #'
 #' Used to return a stored cloudstor password, or request the user set one.
 #' Not a user-facing function.
-#' @return
+#' @return user password as string.
 #'
 #' @examples
 cloud_auth_pwd <- function() {

@@ -7,7 +7,7 @@
 cloud_auth_user()
 }
 \value{
-
+user id as string.
 }
 \description{
 Used to return a stored cloudstor username, or request the user set one.

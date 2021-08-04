@@ -7,7 +7,7 @@
 cloud_auth_pwd()
 }
 \value{
-
+user password as string.
 }
 \description{
 Used to return a stored cloudstor password, or request the user set one.

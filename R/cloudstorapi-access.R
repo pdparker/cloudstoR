@@ -22,7 +22,7 @@ cloudstoR.env <- new.env(parent = emptyenv())
 #'
 #' @param path path to file or folder
 #'
-#' @return
+#' @return encoded url as string
 #'
 #' @examples
 get_cloud_address <- function(path) {
@@ -68,7 +68,7 @@ get_handle <- function(user, password, reset = FALSE) {
 #' @param user cloudstor user name
 #' @param password cloudstor password
 #'
-#' @return
+#' @return a list of files and folders
 #' @export
 #'
 #' @examples
@@ -106,7 +106,7 @@ cloud_list <- function(path = "",
 #' @param dest destination for saving the file
 #' @param open_file if TRUE, open the file using rio. Else, returns the file path
 #'
-#' @return
+#' @return the file object or folder path, depending on open_file
 #' @export
 #'
 #' @examples
@@ -138,7 +138,7 @@ cloud_get <- function(path,
 #' @param user Your cloudstor username
 #' @param password Your cloudstor password
 #'
-#' @return
+#' @return nothing
 #' @export
 #'
 #' @examples
@@ -164,7 +164,7 @@ cloud_put <- function(file_name,
 #' @param user Your cloudstor username
 #' @param password Your cloudstor password
 #'
-#' @return
+#' @return a data.frame of the file and folder metadata
 #' @export
 #'
 #' @examples

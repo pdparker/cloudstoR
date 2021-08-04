@@ -10,7 +10,7 @@ get_cloud_address(path)
 \item{path}{path to file or folder}
 }
 \value{
-
+encoded url as string
 }
 \description{
 Return the full cloud_address path. Not a user facing function.

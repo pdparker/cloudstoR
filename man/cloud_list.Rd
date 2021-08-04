@@ -14,7 +14,7 @@ cloud_list(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 \item{password}{cloudstor password}
 }
 \value{
-
+a list of files and folders
 }
 \description{
 cloud_list

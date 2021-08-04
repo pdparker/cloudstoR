@@ -24,7 +24,7 @@ cloud_put(
 \item{password}{Your cloudstor password}
 }
 \value{
-
+nothing
 }
 \description{
 Save a file to cloudstor.
