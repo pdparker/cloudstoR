@@ -88,7 +88,7 @@ cloud_list <- function(path = "",
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(cloud_address, "/")[[1]][-1:-3],
+  base <- paste(paste("/", strsplit(utils::URLdecode(cloud_address), "/")[[1]][-1:-3],
     sep = "",
     collapse = ""
   ), "/", sep = "")
@@ -221,4 +221,78 @@ cloud_meta <- function(path = "",
     file_size = size
   )
   return(result)
+}
+
+
+#' cloud_browse
+#'
+#' Navigate the folder tree interactively.
+#'
+#' @param path initial path to start the search
+#' @param user Your cloudstor username
+#' @param password Your cloudstor password
+#'
+#' @return the last file path
+#' @export
+#'
+#' @examples
+cloud_browse <- function(path = "",
+                         user = cloud_auth_user(),
+                         password = cloud_auth_pwd()) {
+  choice <- 1
+  first_run <- TRUE
+  new_path <- path
+
+  while (choice != 0) {
+    opts <- cloud_list(path = new_path,
+                       user = user,
+                       password = password)
+
+    if (new_path != "") {
+      # Append only if not at the top of the tree
+      opts <- append(opts, "../")
+    }
+
+    if (first_run) {
+      # Instructions are only shown for the first run
+      cli::cli_h1("Cloud Browser")
+      cli::cli_text(cli::style_bold("Instructions"))
+      cli::cli_text(
+        "Select the next location or file.
+                    Select \"../\" to move up a level, if possible.
+                    Use 0 to exit."
+      )
+    }
+
+    choice <- utils::menu(opts)
+    if (choice != 0) {
+      opt_chosen <- opts[[choice]]
+      if (opt_chosen == "../") {
+        # If move up tree is chosen
+        temp_path <- dirname(new_path)
+        if (temp_path == ".") {
+          new_path <- ""
+        } else {
+          new_path <- temp_path
+        }
+      } else {
+        # Append the option to the existing path
+        if (nchar(new_path) > 0 &
+            substr(new_path, nchar(new_path), nchar(new_path)) != "/") {
+          new_path <- paste(new_path, opt_chosen, sep = "/")
+        } else {
+          new_path <- paste(new_path, opt_chosen, sep = "")
+        }
+      }
+    }
+    # TODO - check if the selection is a file and force exit
+
+    # If the selection is a file, force exit
+    if (nchar(new_path) > 0 &
+        substr(new_path, nchar(new_path), nchar(new_path)) != "/") {
+      choice <- 0
+    }
+    first_run <- FALSE
+  }
+  return(new_path)
 }
