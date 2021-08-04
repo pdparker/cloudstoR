@@ -9,12 +9,12 @@
 This pakage aims to provides access for reading and writing to cloudstor via their webDav API.
 }
 \author{
-\strong{Maintainer}: Philip Parker \email{philip.parker@acu.edu.au} (\href{https://orcid.org/0000-0002-4604-8566}{ORCID})
+\strong{Maintainer}: Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID})
 
 Authors:
 \itemize{
+  \item Philip Parker \email{philip.parker@acu.edu.au} (\href{https://orcid.org/0000-0002-4604-8566}{ORCID})
   \item Timothy Churches
-  \item Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID})
 }
 
 }
