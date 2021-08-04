@@ -11,7 +11,9 @@ cloudstoR.env <- new.env(parent = emptyenv())
   toset <- !(names(op.cloudstoR) %in% names(op))
   if (any(toset)) options(op.cloudstoR[toset])
 
-  assign("authenticated", FALSE, cloudstoR.env)
+  assign("authenticated",
+         Sys.time() - 5 * 60, # Starts requiring trigger
+         cloudstoR.env)
 
   invisible()
 }
@@ -43,15 +45,18 @@ get_cloud_address <- function(path) {
 #'
 #' @examples
 get_handle <- function(user, password, reset = FALSE) {
-  # If not authenticated or reset
-  if (!get("authenticated", envir = cloudstoR.env) | reset) {
+  # If authentication has expired, or reset called
+  if (
+    (difftime(Sys.time(), get("authenticated", envir = cloudstoR.env),
+              units = "min")>5)
+    | reset) {
     h <- curl::new_handle(failonerror = TRUE)
     curl::handle_setopt(h, username = user)
     curl::handle_setopt(h, password = password)
 
     # Save the handle
     assign("handle", h, cloudstoR.env)
-    assign("authenticated", TRUE, cloudstoR.env)
+    assign("authenticated", Sys.time(), cloudstoR.env)
   } else {
     h <- get("handle", envir = cloudstoR.env)
     # Ensure password is reset to NULL
