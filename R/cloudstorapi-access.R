@@ -116,12 +116,16 @@ cloud_list <- function(path = "",
 #'
 #' @examples
 cloud_get <- function(path,
-                      dest = basename(path),
+                      dest = NULL,
                       user = cloud_auth_user(),
                       password = cloud_auth_pwd(),
                       open_file = TRUE) {
   cloud_address <- get_cloud_address(path)
-  p <- file.path(tempdir(), dest)
+  if (is.null(dest)) {
+    p <- file.path(tempdir(), basename(path))
+  } else {
+    p <- file.path(dest)
+  }
   h <- get_handle(user, password)
   curl::curl_download(cloud_address, p, handle = h)
   if (open_file) {

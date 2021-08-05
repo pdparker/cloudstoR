@@ -6,7 +6,7 @@
 \usage{
 cloud_get(
   path,
-  dest = basename(path),
+  dest = NULL,
   user = cloud_auth_user(),
   password = cloud_auth_pwd(),
   open_file = TRUE
