@@ -4,13 +4,14 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(cloudstoR)
 ```
 
 # cloudstoR
@@ -24,56 +25,57 @@ The goal of `cloudstoR` is to simplify accessing data stored on [cloudstor](http
 
 ## Installation
 
-You can install from [GitHub](https://github.com/) with:
+You can install from CRAN (soon...) with:
 
-``` r
+```{r, eval=FALSE}
+install.packages("cloudstoR")
+```
+
+Or install the development version from [GitHub](https://github.com/) with:
+
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("pdparker/cloudstoR")
 ```
 
-Or install the development version with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("pdparker/cloudstoR", ref = "dev")
-```
-
 ## Setup
-You will need your cloudstor username and password. The password is not the one you use to log on to cloudstor. Instead you need to use an [app password](https://support.aarnet.edu.au/hc/en-us/articles/236034707-How-do-I-manage-change-my-passwords-). `cloudstoR` provides an option to store these credentials using [`keyring`](https://github.com/r-lib/keyring).
+You will need your cloudstor username and password. The password is **not** the one you use to log on to cloudstor. Instead you need to use an [app password](https://support.aarnet.edu.au/hc/en-us/articles/236034707-How-do-I-manage-change-my-passwords-). `cloudstoR` provides an option to store these credentials using [`keyring`](https://github.com/r-lib/keyring).
 
 ## Example
 
 ```{r, eval=FALSE}
 library(cloudstoR)
-## basic example code
-my_data = cloud_get(path = 'mydata.sav')
+my_data = cloud_get(path = 'mydata1.csv')
 ```
 
 Note that calling any of the `cloud_*` functions without a username or password prompts `cloudstoR` to store your credentials locally. You can choose not to do this by providing a username and password. 
 
 ```{r, eval=FALSE}
-my_data = cloud_get(path = 'mydata.sav',
+my_data = cloud_get(path = 'mydata1.csv',
                     username = cloudstor_username,
                     password = cloudstor_appPassword)
 ```
 
 ### Getting a list of files
 
-```{r, eval=FALSE}
-cloud_list(path = 'additional/path/to/folder')
+```{r}
+cloud_list(path = 'cloudstoR Demo')
 ```
 
 ### Getting a specific file
 
-```{r, eval=FALSE}
-my_data = cloud_get(path = 'mydata.sav')
+```{r}
+my_data = cloud_get(path = 'mydata1.csv')
+my_data
 ```
 
 Note that `cloudstoR` will try to open the file using [`rio`](https://github.com/leeper/rio) and return a data.frame. If you want to use a different package to open the file, or you just want to download the file without opening it, set `open_file = FALSE` to return a file path instead.
 
-```{r, eval=FALSE}
-my_path = cloud_get(path = 'mydata.sav',
+```{r}
+my_path = cloud_get(path = 'mydata1.csv',
+                    dest="~/mydata1.csv",
                     open_file = FALSE)
+file.exists(my_path)
 ```
 
 
@@ -84,6 +86,13 @@ cloud_put(file_name = 'mydata.sav',
           local_file = '~/datatosave.sav',
           path = 'additional/path/to/folder')
 ```
+
+### Navigating the folder tree
+
+If you don't know the exact file path you want to follow, you can find it with `cloud_browse()`.
+
+![Example of `cloud_browse`](docs/cloud_browse demo.gif)
+
 
 ### Updating credentials
 
