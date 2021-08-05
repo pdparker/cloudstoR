@@ -19,6 +19,7 @@ library(cloudstoR)
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
+[![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
 <!-- badges: end -->
 
 The goal of `cloudstoR` is to simplify accessing data stored on [cloudstor](https://cloudstor.aarnet.edu.au/) via their WebDAV interface. You can use `cloudstoR` to download or upload files, or check the contents of directories.
