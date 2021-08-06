@@ -4,9 +4,9 @@
 \name{cloudstoR-package}
 \alias{cloudstoR}
 \alias{cloudstoR-package}
-\title{cloudstoR: Simplifies access to cloudstor api}
+\title{cloudstoR: Simplifies Access to Cloudstor API}
 \description{
-This pakage aims to provides access for reading and writing to cloudstor via their webDav API.
+Access Cloudstor via their WebDAV API. This package can read, write, and navigate Cloudstor from R.
 }
 \author{
 \strong{Maintainer}: Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID})

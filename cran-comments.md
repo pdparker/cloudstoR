@@ -8,4 +8,10 @@
 
 0 errors | 0 warnings | 0 note
 
-* This is a first release of the package.
+## Comments
+
+This is a resubmission of the first release of the package. I've addressed the following comments:
+
+* The title field is now in title case.
+* Fixed the misspelled words in the README. Note that ‘cloudstor’ and ‘WebDAV’ are correctly spelled.
+* Fixed the issue with the license.
