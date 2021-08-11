@@ -18,7 +18,8 @@ the contents of directories.
 
 ## Installation
 
-You can install from CRAN (soon…) with:
+You can install from
+[CRAN](https://cran.r-project.org/package=cloudstoR) with:
 
 ``` r
 install.packages("cloudstoR")

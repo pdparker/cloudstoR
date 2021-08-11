@@ -8,6 +8,14 @@
 \description{
 Access Cloudstor via their WebDAV API. This package can read, write, and navigate Cloudstor from R.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/pdparker/cloudstoR}
+  \item Report bugs at \url{https://github.com/pdparker/cloudstoR/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Taren Sanders \email{taren.sanders@acu.edu.au} (\href{https://orcid.org/0000-0002-4504-6008}{ORCID})
 

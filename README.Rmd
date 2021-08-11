@@ -26,7 +26,7 @@ The goal of `cloudstoR` is to simplify accessing data stored on [cloudstor](http
 
 ## Installation
 
-You can install from CRAN (soon...) with:
+You can install from [CRAN](https://cran.r-project.org/package=cloudstoR) with:
 
 ```{r, eval=FALSE}
 install.packages("cloudstoR")
