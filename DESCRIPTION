@@ -1,6 +1,6 @@
 Package: cloudstoR
 Title: Simplifies Access to Cloudstor API
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     c(person(given = "Taren",
            family = "Sanders",
