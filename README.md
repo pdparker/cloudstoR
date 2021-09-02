@@ -9,6 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
 [![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 The goal of `cloudstoR` is to simplify accessing data stored on
@@ -18,7 +20,8 @@ the contents of directories.
 
 ## Installation
 
-You can install from CRAN (soon…) with:
+You can install from
+[CRAN](https://cran.r-project.org/package=cloudstoR) with:
 
 ``` r
 install.packages("cloudstoR")
