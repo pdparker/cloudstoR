@@ -9,7 +9,8 @@ cloud_get(
   dest = NULL,
   user = cloud_auth_user(),
   password = cloud_auth_pwd(),
-  open_file = TRUE
+  open_file = TRUE,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ cloud_get(
 \item{password}{cloudstor password}
 
 \item{open_file}{if TRUE, open the file using rio. Else, returns the file path}
+
+\item{\dots}{pass additional arguments to rio::import}
 }
 \value{
 the file object or folder path, depending on open_file
