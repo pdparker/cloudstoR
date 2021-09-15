@@ -5,23 +5,24 @@
 \title{cloud_put}
 \usage{
 cloud_put(
-  file_name,
   local_file,
   path = "",
+  file_name = basename(local_file),
   user = cloud_auth_user(),
   password = cloud_auth_pwd()
 )
 }
 \arguments{
-\item{file_name}{What you want to call the file on cloudstor}
+\item{local_file}{where the file is located on your computer}
 
-\item{local_file}{Where the file is located}
+\item{path}{the destination on cloudstor}
 
-\item{path}{path to file or folder}
+\item{file_name}{Optional. What you want to call the file on cloudstor
+If it is not provided, it is the same as the file name of the local file}
 
-\item{user}{Your cloudstor username}
+\item{user}{Optional. Your cloudstor username}
 
-\item{password}{Your cloudstor password}
+\item{password}{Optional. Your cloudstor password}
 }
 \value{
 nothing

@@ -143,27 +143,43 @@ cloud_get <- function(path,
 #'
 #' Save a file to cloudstor.
 #'
-#' @param file_name What you want to call the file on cloudstor
-#' @param local_file Where the file is located
-#' @param path path to file or folder
-#' @param user Your cloudstor username
-#' @param password Your cloudstor password
+#' @param local_file where the file is located on your computer
+#' @param path the destination on cloudstor
+#' @param file_name Optional. What you want to call the file on cloudstor
+#' If it is not provided, it is the same as the file name of the local file
+#' @param user Optional. Your cloudstor username
+#' @param password Optional. Your cloudstor password
 #'
 #' @return nothing
 #' @export
 #'
 #' @examples
-cloud_put <- function(file_name,
-                      local_file,
+cloud_put <- function(local_file,
                       path = "",
+                      file_name = basename(local_file),
                       user = cloud_auth_user(),
                       password = cloud_auth_pwd()) {
   cloud_address <- get_cloud_address(file.path(path,file_name))
   in_path <- path.expand(local_file)
-  httr::PUT(cloud_address,
+  resp <- httr::PUT(cloud_address,
     body = httr::upload_file(in_path),
     config = httr::authenticate(user, password)
   )
+
+  # Alert user on error
+  httr::stop_for_status(resp, "upload file")
+
+  if (httr::http_status(resp)$category == "Success"){
+    msgtype <- switch(as.character(httr::status_code(resp)),
+                      "204" = "updated",
+                      "201" = "added")
+
+    cli::cli_alert_success(sprintf(
+      "Success! Your file has been %s.",
+      msgtype
+    ))
+  }
+
 }
 
 
