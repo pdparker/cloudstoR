@@ -6,8 +6,6 @@
 #'
 #' @return Nothing. Keys are stored in Keyring.
 #' @export
-#'
-#' @examples
 cloud_auth <- function(reset_keys = FALSE) {
   current_keys <- keyring::key_list()$service
 
@@ -57,8 +55,6 @@ cloud_auth <- function(reset_keys = FALSE) {
 #' Used to return a stored cloudstor username, or request the user set one.
 #' Not a user-facing function.
 #' @return user id as string.
-#'
-#' @examples
 cloud_auth_user <- function() {
   if (!"CLOUDSTOR_USER" %in% keyring::key_list()$service) {
     cloud_auth()
@@ -70,9 +66,7 @@ cloud_auth_user <- function() {
 #'
 #' Used to return a stored cloudstor password, or request the user set one.
 #' Not a user-facing function.
-#' @return user password as string.
-#'
-#' @examples
+#' @return user password as string.\
 cloud_auth_pwd <- function() {
   if (!"CLOUDSTOR_PWD" %in% keyring::key_list()$service) {
     cloud_auth()
