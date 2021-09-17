@@ -25,8 +25,6 @@ cloudstoR.env <- new.env(parent = emptyenv())
 #' @param path path to file or folder
 #'
 #' @return encoded url as string
-#'
-#' @examples
 get_cloud_address <- function(path) {
   cloud_address <- paste0(getOption("cloudstoR.cloud_address"), path)
   cloud_address <- utils::URLencode(cloud_address)
@@ -42,8 +40,6 @@ get_cloud_address <- function(path) {
 #' @param reset remove the existing authentication and handle
 #'
 #' @return curl handle object
-#'
-#' @examples
 get_handle <- function(user, password, reset = FALSE) {
   # If authentication has expired, or reset called
   if (
@@ -75,8 +71,6 @@ get_handle <- function(user, password, reset = FALSE) {
 #'
 #' @return a list of files and folders
 #' @export
-#'
-#' @examples
 cloud_list <- function(path = "",
                        user = cloud_auth_user(),
                        password = cloud_auth_pwd()) {
@@ -114,8 +108,6 @@ cloud_list <- function(path = "",
 #'
 #' @return the file object or folder path, depending on open_file
 #' @export
-#'
-#' @examples
 cloud_get <- function(path,
                       dest = NULL,
                       user = cloud_auth_user(),
@@ -152,8 +144,6 @@ cloud_get <- function(path,
 #'
 #' @return nothing
 #' @export
-#'
-#' @examples
 cloud_put <- function(local_file,
                       path = "",
                       file_name = basename(local_file),
@@ -193,8 +183,6 @@ cloud_put <- function(local_file,
 #'
 #' @return a data.frame of the file and folder metadata
 #' @export
-#'
-#' @examples
 cloud_meta <- function(path = "",
                        user = cloud_auth_user(),
                        password = cloud_auth_pwd()) {
@@ -256,8 +244,6 @@ cloud_meta <- function(path = "",
 #'
 #' @return the last file path
 #' @export
-#'
-#' @examples
 cloud_browse <- function(path = "",
                          user = cloud_auth_user(),
                          password = cloud_auth_pwd()) {
@@ -307,7 +293,6 @@ cloud_browse <- function(path = "",
         }
       }
     }
-    # TODO - check if the selection is a file and force exit
 
     # If the selection is a file, force exit
     if (nchar(new_path) > 0 &
