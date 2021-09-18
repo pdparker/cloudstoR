@@ -1,11 +1,16 @@
-library(cloudstoR)
-library(mockery)
+# Setup
+test_df <- data.frame(A = sample(1:10, 3, replace = TRUE),
+                      B = sample(1:10, 3, replace = TRUE),
+                      C = sample(1:10, 3, replace = TRUE))
 
-mock_resp <- "<?xml version=\"1.0\"?>\n<d:multistatus xmlns:d=\"DAV:\" xmlns:s=\"http://sabredav.org/ns\" xmlns:oc=\"http://owncloud.org/ns\"><d:response><d:href>/plus/remote.php/webdav/</d:href><d:propstat><d:prop><d:getlastmodified>Wed, 09 Jun 2021 05:08:23 GMT</d:getlastmodified><d:resourcetype><d:collection/></d:resourcetype><d:quota-used-bytes>472824158981</d:quota-used-bytes><d:quota-available-bytes>1097368772135</d:quota-available-bytes><d:getetag>&quot;9e8348556d5b1230dd96e6f152e26b5b&quot;</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response><d:response><d:href>/plus/remote.php/webdav/BelongingProject/</d:href><d:propstat><d:prop><d:getlastmodified>Wed, 09 Jun 2021 05:12:45 GMT</d:getlastmodified><d:resourcetype><d:collection/></d:resourcetype><d:quota-used-bytes>1359721519</d:quota-used-bytes><d:quota-available-bytes>1097368772135</d:quota-available-bytes><d:getetag>&quot;60c04dd04a0b8&quot;</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat><d:propstat><d:prop><d:getcontentlength/><d:getcontenttype/></d:prop><d:status>HTTP/1.1 404 Not Found</d:status></d:propstat></d:response><d:response><d:href>/plus/remote.php/webdav/Documents/</d:href><d:propstat><d:prop><d:getlastmodified>Fri, 31 May 2019 06:23:52 GMT</d:getlastmodified><d:resourcetype><d:collection/></d:resourcetype><d:quota-used-bytes>36227</d:quota-used-bytes><d:quota-available-bytes>1097368772135</d:quota-available-bytes><d:getetag>&quot;5cf0c88be4ef9&quot;</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat><d:propstat><d:prop><d:getcontentlength/><d:getcontenttype/></d:prop><d:status>HTTP/1.1 404 Not Found</d:status></d:propstat></d:response><d:response><d:href>/plus/remote.php/webdav/Photos/</d:href><d:propstat><d:prop><d:getlastmodified>Fri, 31 May 2019 06:23:52 GMT</d:getlastmodified><d:resourcetype><d:collection/></d:resourcetype><d:quota-used-bytes>678556</d:quota-used-bytes><d:quota-available-bytes>1097368772135</d:quota-available-bytes><d:getetag>&quot;5cf0c88be4ef9&quot;</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat><d:propstat><d:prop><d:getcontentlength/><d:getcontenttype/></d:prop><d:status>HTTP/1.1 404 Not Found</d:status></d:propstat></d:response><d:response><d:href>/plus/remote.php/webdav/Shared/</d:href><d:propstat><d:prop><d:getlastmodified>Mon, 11 Jan 2021 04:56:56 GMT</d:getlastmodified><d:resourcetype><d:collection/></d:resourcetype><d:quota-used-bytes>470681303339</d:quota-used-bytes><d:quota-available-bytes>1097368772135</d:quota-available-bytes><d:getetag>&quot;097d627213d3e5684b571f34d70a1509&quot;</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat><d:propstat><d:prop><d:getcontentlength/><d:getcontenttype/></d:prop><d:status>HTTP/1.1 404 Not Found</d:status></d:propstat></d:response><d:response><d:href>/plus/remote.php/webdav/iPLAY%20Data/</d:href><d:propstat><d:prop><d:getlastmodified>Wed, 10 Mar 2021 11:26:23 GMT</d:getlastmodified><d:resourcetype><d:collection/></d:resourcetype><d:quota-used-bytes>782419339</d:quota-used-bytes><d:quota-available-bytes>1097368772135</d:quota-available-bytes><d:getetag>&quot;60493b3ebf967&quot;</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat><d:propstat><d:prop><d:getcontentlength/><d:getcontenttype/></d:prop><d:status>HTTP/1.1 404 Not Found</d:status></d:propstat></d:response></d:multistatus>"
+test_folder <- file.path(tempdir(), "cloudstor_tests")
+test_file <- file.path(test_folder, "mydata1.csv")
+dir.create(test_folder)
+write.csv(test_df, test_file, row.names = FALSE)
 
 # get_cloud_address
 
-test_that("Generate URLs", {
+test_that("get_cloud_address generates correct URLs", {
   expect_equal(
     get_cloud_address("newpath"),
     "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/newpath"
@@ -18,22 +23,58 @@ test_that("Generate URLs", {
 })
 
 # cloud_list
+test_that("cloud_list returns a correct list of files and folders", {
+  skip_if_no_envs()
+  skip_if_offline()
+  exp_res <- c("Another Folder/", "mydata1.csv", "mydata2.csv")
 
-test_that("Returns correct list", {
-  exp_res <- c(
-    "BelongingProject/", "Documents/", "Photos/",
-    "Shared/", "iPLAY Data/"
-  )
-
-  # Skip credentials
-  stub(cloud_list, "cloud_auth_user", NULL)
-  stub(cloud_list, "cloud_auth_pwd", NULL)
-
-  # Don't submit request
-  stub(cloud_list, "curl::curl_fetch_memory", NULL)
-
-  # Use dummy returned text
-  stub(cloud_list, "rawToChar", mock_resp)
-
-  expect_equal(cloud_list(), exp_res)
+  expect_equal(cloud_list("cloudstoR Tests",
+                          user = Sys.getenv("CLOUD_USER"),
+                          password = Sys.getenv("CLOUD_PASS")),
+               exp_res)
 })
+
+# cloud_put
+test_that("cloud_put can store a file", {
+  # This fails if an error is returned
+  expect_error(suppressMessages(cloud_put(test_file,
+                         path = "cloudstoR Tests",
+                         user = Sys.getenv("CLOUD_USER"),
+                         password = Sys.getenv("CLOUD_PASS"))),
+               NA)
+})
+
+# cloud_get
+test_that("cloud_get can retrieve a file", {
+  expect_equal(cloud_get("cloudstoR Tests/mydata1.csv",
+                         user = Sys.getenv("CLOUD_USER"),
+                         password = Sys.getenv("CLOUD_PASS")),
+               test_df)
+
+})
+
+test_that("cloud_get can pass arguements to rio", {
+  expect_equal(cloud_get("cloudstoR Tests/mydata1.csv",
+                         user = Sys.getenv("CLOUD_USER"),
+                         password = Sys.getenv("CLOUD_PASS"),
+                         # Pass nrows to rio
+                         nrows = 1
+                         ),
+               test_df[1,])
+})
+
+# cloud_meta
+test_that("cloud_get can pass arguements to rio", {
+  meta_resp <- cloud_meta("cloudstoR Tests")
+
+  # Returns correct columns
+  expect_equal(names(meta_resp),
+               c("file_name", "tag", "file_modified", "file_size"))
+
+  # Should be four files/folders
+  expect_length(meta_resp, 4)
+
+})
+
+# Clean up
+unlink(test_folder, recursive = TRUE)
