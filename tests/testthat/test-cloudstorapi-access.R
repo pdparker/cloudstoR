@@ -36,6 +36,8 @@ test_that("cloud_list returns a correct list of files and folders", {
 
 # cloud_put
 test_that("cloud_put can store a file", {
+  skip_if_no_envs()
+  skip_if_offline()
   # This fails if an error is returned
   expect_error(suppressMessages(cloud_put(test_file,
                          path = "cloudstoR Tests",
@@ -46,6 +48,8 @@ test_that("cloud_put can store a file", {
 
 # cloud_get
 test_that("cloud_get can retrieve a file", {
+  skip_if_no_envs()
+  skip_if_offline()
   expect_equal(cloud_get("cloudstoR Tests/mydata1.csv",
                          user = Sys.getenv("CLOUD_USER"),
                          password = Sys.getenv("CLOUD_PASS")),
@@ -54,6 +58,8 @@ test_that("cloud_get can retrieve a file", {
 })
 
 test_that("cloud_get can pass arguements to rio", {
+  skip_if_no_envs()
+  skip_if_offline()
   expect_equal(cloud_get("cloudstoR Tests/mydata1.csv",
                          user = Sys.getenv("CLOUD_USER"),
                          password = Sys.getenv("CLOUD_PASS"),
@@ -65,6 +71,8 @@ test_that("cloud_get can pass arguements to rio", {
 
 # cloud_meta
 test_that("cloud_get can pass arguements to rio", {
+  skip_if_no_envs()
+  skip_if_offline()
   meta_resp <- cloud_meta("cloudstoR Tests")
 
   # Returns correct columns
