@@ -17,6 +17,7 @@ library(cloudstoR)
 # cloudstoR
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/cloudstoR)](https://CRAN.R-project.org/package=cloudstoR)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) 
 [![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
 <!-- badges: end -->

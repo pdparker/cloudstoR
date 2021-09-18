@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/cloudstoR)](https://CRAN.R-project.org/package=cloudstoR)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
@@ -70,10 +72,10 @@ cloud_list(path = 'cloudstoR Tests')
 ``` r
 my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 my_data
-#>    A B  C
-#> 1  9 6  5
-#> 2  9 1  1
-#> 3 10 3 10
+#>   A  B C
+#> 1 6 10 6
+#> 2 9  9 7
+#> 3 5  3 5
 ```
 
 Note that `cloudstoR` will try to open the file using
