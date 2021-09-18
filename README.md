@@ -8,7 +8,6 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
-
 <!-- badges: end -->
 
 The goal of `cloudstoR` is to simplify accessing data stored on
@@ -46,7 +45,7 @@ password](https://support.aarnet.edu.au/hc/en-us/articles/236034707-How-do-I-man
 
 ``` r
 library(cloudstoR)
-my_data = cloud_get(path = 'mydata1.csv')
+my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 ```
 
 Note that calling any of the `cloud_*` functions without a username or
@@ -54,7 +53,7 @@ password prompts `cloudstoR` to store your credentials locally. You can
 choose not to do this by providing a username and password.
 
 ``` r
-my_data = cloud_get(path = 'mydata1.csv',
+my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv',
                     username = cloudstor_username,
                     password = cloudstor_appPassword)
 ```
@@ -62,19 +61,19 @@ my_data = cloud_get(path = 'mydata1.csv',
 ### Getting a list of files
 
 ``` r
-cloud_list(path = 'cloudstoR Demo')
-#> [1] "Another Folder/" "mydata2.csv"
+cloud_list(path = 'cloudstoR Tests')
+#> [1] "Another Folder/" "mydata1.csv"     "mydata2.csv"
 ```
 
 ### Getting a specific file
 
 ``` r
-my_data = cloud_get(path = 'mydata1.csv')
+my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 my_data
-#>   A B C
-#> 1 1 1 3
-#> 2 1 2 2
-#> 3 1 3 1
+#>    A B  C
+#> 1  9 6  5
+#> 2  9 1  1
+#> 3 10 3 10
 ```
 
 Note that `cloudstoR` will try to open the file using
@@ -84,7 +83,7 @@ download the file without opening it, set `open_file = FALSE` to return
 a file path instead.
 
 ``` r
-my_path = cloud_get(path = 'mydata1.csv',
+my_path = cloud_get(path = 'cloudstoR Tests/mydata1.csv',
                     dest="~/mydata1.csv",
                     open_file = FALSE)
 file.exists(my_path)
@@ -94,7 +93,7 @@ file.exists(my_path)
 ### Saving a file to Cloudstor
 
 ``` r
-cloud_put(file_name = 'mydata.sav',
+cloud_put(file_name = 'cloudstoR Tests/mydata.sav',
           local_file = '~/datatosave.sav',
           path = 'additional/path/to/folder')
 ```

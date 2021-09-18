@@ -17,8 +17,8 @@ library(cloudstoR)
 # cloudstoR
 
 <!-- badges: start -->
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
-
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) 
+[![R-CMD-check](https://github.com/pdparker/cloudstoR/workflows/R-CMD-check/badge.svg)](https://github.com/pdparker/cloudstoR/actions)
 <!-- badges: end -->
 
 The goal of `cloudstoR` is to simplify accessing data stored on [cloudstor](https://cloudstor.aarnet.edu.au/) via their WebDAV interface. You can use `cloudstoR` to download or upload files, or check the contents of directories.
@@ -45,13 +45,13 @@ You will need your cloudstor username and password. The password is **not** the 
 
 ```{r, eval=FALSE}
 library(cloudstoR)
-my_data = cloud_get(path = 'mydata1.csv')
+my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 ```
 
 Note that calling any of the `cloud_*` functions without a username or password prompts `cloudstoR` to store your credentials locally. You can choose not to do this by providing a username and password. 
 
 ```{r, eval=FALSE}
-my_data = cloud_get(path = 'mydata1.csv',
+my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv',
                     username = cloudstor_username,
                     password = cloudstor_appPassword)
 ```
@@ -59,20 +59,20 @@ my_data = cloud_get(path = 'mydata1.csv',
 ### Getting a list of files
 
 ```{r}
-cloud_list(path = 'cloudstoR Demo')
+cloud_list(path = 'cloudstoR Tests')
 ```
 
 ### Getting a specific file
 
 ```{r}
-my_data = cloud_get(path = 'mydata1.csv')
+my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 my_data
 ```
 
 Note that `cloudstoR` will try to open the file using [`rio`](https://github.com/leeper/rio) and return a data.frame. If you want to use a different package to open the file, or you just want to download the file without opening it, set `open_file = FALSE` to return a file path instead.
 
 ```{r}
-my_path = cloud_get(path = 'mydata1.csv',
+my_path = cloud_get(path = 'cloudstoR Tests/mydata1.csv',
                     dest="~/mydata1.csv",
                     open_file = FALSE)
 file.exists(my_path)
@@ -82,7 +82,7 @@ file.exists(my_path)
 ### Saving a file to Cloudstor
 
 ```{r, eval=FALSE}
-cloud_put(file_name = 'mydata.sav',
+cloud_put(file_name = 'cloudstoR Tests/mydata.sav',
           local_file = '~/datatosave.sav',
           path = 'additional/path/to/folder')
 ```
