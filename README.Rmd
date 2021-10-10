@@ -70,7 +70,7 @@ my_data = cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 my_data
 ```
 
-Note that `cloudstoR` will try to open the file using [`rio`](https://github.com/leeper/rio) and return a data.frame. If you want to use a different package to open the file, or you just want to download the file without opening it, set `open_file = FALSE` to return a file path instead.
+Note that `cloudstoR` will try to open the file using [`rio`](https://github.com/leeper/rio) and return a data.frame. The temporary version of the file is deleted once it is read into memory. If you want to use a different package to open the file, or you just want to download and keep the file without opening it, set `open_file = FALSE` to return a file path instead. 
 
 ```{r}
 my_path = cloud_get(path = 'cloudstoR Tests/mydata1.csv',
