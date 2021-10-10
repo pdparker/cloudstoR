@@ -124,6 +124,7 @@ cloud_get <- function(path,
   curl::curl_download(cloud_address, p, handle = h)
   if (open_file) {
     d <- rio::import(p, ...)
+    on.exit(unlink(d))
     return(d)
   } else {
     return(p)
