@@ -8,10 +8,14 @@
 
 0 errors | 0 warnings | 0 note
 
+Note that this package interacts with a third-party API which requires 
+authentication. Therefore, most tests are skipped on CRAN, but are run (and 
+are passing) locally and on GitHub actions.
+
 ## Comments
 
-This is a resubmission of the first release of the package. I've addressed the following comments:
+This is a minor update to the existing package, mostly to create better 
+documentation and add additional tests. These notes might be helpful:
 
-* The title field is now in title case.
-* Fixed the misspelled words in the README. Note that ‘cloudstor’ and ‘WebDAV’ are correctly spelled.
-* Fixed the issue with the license.
+* Note that ‘Cloudstor’ and ‘WebDAV’ are correctly spelled.
+* The third-party API is called 'Cloudstor', and this package is 'cloudstoR'.
