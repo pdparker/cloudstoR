@@ -13,20 +13,21 @@ cloud_put(
 )
 }
 \arguments{
-\item{local_file}{where the file is located on your computer}
+\item{local_file}{Where the file is located on your computer.}
 
-\item{path}{the destination on cloudstor}
+\item{path}{The destination on Cloudstor.}
 
-\item{file_name}{Optional. What you want to call the file on cloudstor
+\item{file_name}{Optional. What you want to call the file on cloudstor?
 If it is not provided, it is the same as the file name of the local file}
 
-\item{user}{Optional. Your cloudstor username}
+\item{user}{Optional. Your Cloudstor username.}
 
-\item{password}{Optional. Your cloudstor password}
+\item{password}{Optional. Your Cloudstor password.}
 }
 \value{
-nothing
+Nothing is returned. A success or error message is printed.
 }
 \description{
-Save a file to cloudstor.
+\code{cloud_put()} saves a file to Cloudstor. If the file already exists, it is
+replaced.
 }

@@ -7,15 +7,15 @@
 cloud_list(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 }
 \arguments{
-\item{path}{path to file or folder}
+\item{path}{The path to file or folder.}
 
-\item{user}{cloudstor user name}
+\item{user}{Cloudstor user name.}
 
-\item{password}{cloudstor password}
+\item{password}{Cloudstor password.}
 }
 \value{
-a list of files and folders
+A list of files and folders.
 }
 \description{
-cloud_list
+\code{cloud_list()} returns a list of the files located in a folder.
 }

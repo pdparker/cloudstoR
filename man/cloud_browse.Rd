@@ -7,15 +7,29 @@
 cloud_browse(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 }
 \arguments{
-\item{path}{initial path to start the search}
+\item{path}{The initial path to start the search. If not provided, the
+function starts at the top-level folder.}
 
-\item{user}{Your cloudstor username}
+\item{user}{Your Cloudstor username.}
 
-\item{password}{Your cloudstor password}
+\item{password}{Your Cloudstor password.}
 }
 \value{
 the last file path
 }
 \description{
-Navigate the folder tree interactively.
+\code{cloud_browse()} lets you navigate the folder tree interactively. This is
+useful for finding a file or folder path which can then be used in
+\code{cloud_get()} or \code{cloud_put()}. This function is only intended to be used
+interactively - you should not use this function programmatically.
+
+When you call \code{cloud_browse()} you are given a list of files and folders
+(either at the top-level, or from the provided \code{path}). You provide the
+numeric number of the folder or file you wish to move to to continue. If you
+are not at the top level, you can select "../" to move up one folder. At any
+time you can select 0 to exit the interactive navigation.
+
+If you select a folder, you are shown the files and folders within that
+folder. If you select a file, the full path for the file is shown (so that
+it can be passed to another function) and the interactive session is ended.
 }

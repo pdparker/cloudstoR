@@ -14,22 +14,22 @@ cloud_get(
 )
 }
 \arguments{
-\item{path}{path to file or folder}
+\item{path}{The path to file or folder.}
 
-\item{dest}{destination for saving the file}
+\item{dest}{The destination for saving the file.}
 
-\item{user}{cloudstor user name}
+\item{user}{Cloudstor user name}
 
-\item{password}{cloudstor password}
+\item{password}{Cloudstor password}
 
-\item{open_file}{if TRUE, open the file using rio. Else, returns the file path}
+\item{open_file}{If TRUE, open the file using rio. Else, returns the file path}
 
-\item{\dots}{pass additional arguments to rio::import}
+\item{\dots}{pass additional arguments to \code{rio::import()}}
 }
 \value{
-the file object or folder path, depending on open_file
+The file object or folder path is returned, depending on \code{open_file}
 }
 \description{
-Download a file from a cloudstor folder. The file is opened
+\code{cloud_list()} downloads a file from a Cloudstor folder. The file is opened
 and read into R using rio, or optionally the file path is returned.
 }

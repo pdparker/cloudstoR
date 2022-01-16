@@ -1,8 +1,10 @@
 #' cloud_auth
 #'
-#' Get users credentials and store them securely in keyring.
+#' @description
+#' `cloud_auth()` gets the user's credentials and stores them securely in
+#' keyring.
 #'
-#' @param reset_keys override existing keys
+#' @param reset_keys Override existing keys.
 #'
 #' @return Nothing. Keys are stored in Keyring.
 #' @export

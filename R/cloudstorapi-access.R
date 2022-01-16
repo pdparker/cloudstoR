@@ -67,11 +67,14 @@ get_handle <- function(user, password, reset = FALSE) {
 
 #' cloud_list
 #'
-#' @param path path to file or folder
-#' @param user cloudstor user name
-#' @param password cloudstor password
+#' @description
+#' `cloud_list()` returns a list of the files located in a folder.
 #'
-#' @return a list of files and folders
+#' @param path The path to file or folder.
+#' @param user Cloudstor user name.
+#' @param password Cloudstor password.
+#'
+#' @return A list of files and folders.
 #' @export
 cloud_list <- function(path = "",
                        user = cloud_auth_user(),
@@ -98,17 +101,18 @@ cloud_list <- function(path = "",
 
 #' cloud_get
 #'
-#' Download a file from a cloudstor folder. The file is opened
+#' @description
+#' `cloud_list()` downloads a file from a Cloudstor folder. The file is opened
 #' and read into R using rio, or optionally the file path is returned.
 #'
-#' @param path path to file or folder
-#' @param user cloudstor user name
-#' @param password cloudstor password
-#' @param dest destination for saving the file
-#' @param open_file if TRUE, open the file using rio. Else, returns the file path
-#' @param \dots pass additional arguments to rio::import
+#' @param path The path to file or folder.
+#' @param user Cloudstor user name
+#' @param password Cloudstor password
+#' @param dest The destination for saving the file.
+#' @param open_file If TRUE, open the file using rio. Else, returns the file path
+#' @param \dots pass additional arguments to `rio::import()`
 #'
-#' @return the file object or folder path, depending on open_file
+#' @return The file object or folder path is returned, depending on `open_file`
 #' @export
 cloud_get <- function(path,
                       dest = NULL,
@@ -136,16 +140,18 @@ cloud_get <- function(path,
 
 #' cloud_put
 #'
-#' Save a file to cloudstor.
+#' @description
+#' `cloud_put()` saves a file to Cloudstor. If the file already exists, it is
+#' replaced.
 #'
-#' @param local_file where the file is located on your computer
-#' @param path the destination on cloudstor
-#' @param file_name Optional. What you want to call the file on cloudstor
+#' @param local_file Where the file is located on your computer.
+#' @param path The destination on Cloudstor.
+#' @param file_name Optional. What you want to call the file on cloudstor?
 #' If it is not provided, it is the same as the file name of the local file
-#' @param user Optional. Your cloudstor username
-#' @param password Optional. Your cloudstor password
+#' @param user Optional. Your Cloudstor username.
+#' @param password Optional. Your Cloudstor password.
 #'
-#' @return nothing
+#' @return Nothing is returned. A success or error message is printed.
 #' @export
 cloud_put <- function(local_file,
                       path = "",
@@ -178,13 +184,15 @@ cloud_put <- function(local_file,
 
 #' cloud_meta
 #'
-#' Return a data.frame of the metadata for a file or folder
+#' @description
+#' `cloud_meta()` returns the metadata for a file or folder. This can be useful
+#' for checking if a file has been modified.
 #'
-#' @param path path to file or folder
-#' @param user Your cloudstor username
-#' @param password Your cloudstor password
+#' @param path The path to file or folder.
+#' @param user Your Cloudstor username
+#' @param password Your Cloudstor password
 #'
-#' @return a data.frame of the file and folder metadata
+#' @return A data.frame of the file and folder metadata is returned.
 #' @export
 cloud_meta <- function(path = "",
                        user = cloud_auth_user(),
@@ -239,11 +247,26 @@ cloud_meta <- function(path = "",
 
 #' cloud_browse
 #'
-#' Navigate the folder tree interactively.
+#' @description
+#' `cloud_browse()` lets you navigate the folder tree interactively. This is
+#' useful for finding a file or folder path which can then be used in
+#' `cloud_get()` or `cloud_put()`. This function is only intended to be used
+#' interactively - you should not use this function programmatically.
 #'
-#' @param path initial path to start the search
-#' @param user Your cloudstor username
-#' @param password Your cloudstor password
+#' When you call `cloud_browse()` you are given a list of files and folders
+#' (either at the top-level, or from the provided `path`). You provide the
+#' numeric number of the folder or file you wish to move to to continue. If you
+#' are not at the top level, you can select "../" to move up one folder. At any
+#' time you can select 0 to exit the interactive navigation.
+#'
+#' If you select a folder, you are shown the files and folders within that
+#' folder. If you select a file, the full path for the file is shown (so that
+#' it can be passed to another function) and the interactive session is ended.
+#'
+#' @param path The initial path to start the search. If not provided, the
+#' function starts at the top-level folder.
+#' @param user Your Cloudstor username.
+#' @param password Your Cloudstor password.
 #'
 #' @return the last file path
 #' @export

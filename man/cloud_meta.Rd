@@ -7,15 +7,16 @@
 cloud_meta(path = "", user = cloud_auth_user(), password = cloud_auth_pwd())
 }
 \arguments{
-\item{path}{path to file or folder}
+\item{path}{The path to file or folder.}
 
-\item{user}{Your cloudstor username}
+\item{user}{Your Cloudstor username}
 
-\item{password}{Your cloudstor password}
+\item{password}{Your Cloudstor password}
 }
 \value{
-a data.frame of the file and folder metadata
+A data.frame of the file and folder metadata is returned.
 }
 \description{
-Return a data.frame of the metadata for a file or folder
+\code{cloud_meta()} returns the metadata for a file or folder. This can be useful
+for checking if a file has been modified.
 }
