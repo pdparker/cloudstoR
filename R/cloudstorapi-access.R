@@ -25,6 +25,7 @@ cloudstoR.env <- new.env(parent = emptyenv())
 #' @param path path to file or folder
 #'
 #' @return encoded url as string
+#' @keywords internal
 get_cloud_address <- function(path) {
   cloud_address <- paste0(getOption("cloudstoR.cloud_address"), path)
   cloud_address <- utils::URLencode(cloud_address)
@@ -40,6 +41,7 @@ get_cloud_address <- function(path) {
 #' @param reset remove the existing authentication and handle
 #'
 #' @return curl handle object
+#' @keywords internal
 get_handle <- function(user, password, reset = FALSE) {
   # If authentication has expired, or reset called
   if (

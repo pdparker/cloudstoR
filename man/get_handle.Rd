@@ -19,3 +19,4 @@ curl handle object
 \description{
 Return a handle for CURL to use. Not a user facing function
 }
+\keyword{internal}

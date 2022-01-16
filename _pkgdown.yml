@@ -1,2 +1,20 @@
 url: https://pdparker.github.io/cloudstoR/
 
+reference:
+- title: Interact
+  desc:  Functions to retrieve from or upload files on Cloudstor.
+  contents:
+  - cloud_get
+  - cloud_put
+
+- title: Inform
+  desc:  Get information about files or folders.
+  contents:
+  - cloud_browse
+  - cloud_list
+  - cloud_meta
+
+- title: Authenticate
+  desc:  Functions to handle user authentication.
+  contents:
+  - cloud_auth

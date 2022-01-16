@@ -11,6 +11,7 @@ Access Cloudstor via their WebDAV API. This package can read, write, and navigat
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://pdparker.github.io/cloudstoR}
   \item \url{https://github.com/pdparker/cloudstoR}
   \item Report bugs at \url{https://github.com/pdparker/cloudstoR/issues}
 }

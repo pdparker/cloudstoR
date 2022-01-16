@@ -15,3 +15,4 @@ encoded url as string
 \description{
 Return the full cloud_address path. Not a user facing function.
 }
+\keyword{internal}
