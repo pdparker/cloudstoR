@@ -70,7 +70,7 @@ test_that("cloud_get can pass arguements to rio", {
 })
 
 # cloud_meta
-test_that("cloud_get can pass arguements to rio", {
+test_that("cloud_meta returns correct information", {
   skip_if_no_envs()
   skip_if_offline()
   meta_resp <- cloud_meta("cloudstoR Tests")
