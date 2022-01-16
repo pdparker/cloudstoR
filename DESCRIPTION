@@ -19,8 +19,7 @@ Authors@R:
            comment = c(ORCID = "")))
 Description: Access Cloudstor via their WebDAV API. This package can read, write, and navigate Cloudstor from R.
 URL: https://pdparker.github.io/cloudstoR,
-    https://github.com/pdparker/cloudstoR,
-    https://pdparker.github.io/cloudstoR/
+    https://github.com/pdparker/cloudstoR
 BugReports: https://github.com/pdparker/cloudstoR/issues
 License: GPL (>= 3)
 Suggests: 
