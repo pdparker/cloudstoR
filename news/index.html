@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cloudstoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -48,15 +48,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="cloudstor-development-version">cloudstoR (development version)<a class="anchor" aria-label="anchor" href="#cloudstor-development-version"></a></h2>
-<p>To be released as cloudstoR 0.2.0.</p>
-<ul><li>Minor housekeeping (updates to README and DESCRIPTION).</li>
-<li>Users can now pass additional arguments to rio::import via cloud_get. For example, to set the column types or to choose the number or rows to import.</li>
+<h2 class="page-header" data-toc-text="0.2.0" id="cloudstor-020">cloudstoR 0.2.0<a class="anchor" aria-label="anchor" href="#cloudstor-020"></a></h2>
+<ul><li>Minor housekeeping (updates to <code>README</code> and <code>DESCRIPTION</code>).</li>
+<li>Users can now pass additional arguments to <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code> via <code>cloud_get</code>. For example, to set the column types or to choose the number or rows to import.</li>
 <li>
-<code>cloud_put</code> no returns a meaningful message on success or failure.</li>
+<code>cloud_put</code> now returns a meaningful message on success or failure.</li>
 <li>New tests and workflow to directly test the API.</li>
 <li>
-<code>cloud_get</code> now deletes the temporary file one it is loaded into memory.</li>
+<code>cloud_get</code> now deletes the temporary file once it is loaded into memory.</li>
+<li>Expand on the documentation and create a pkgdown site to provide user support.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="cloudstor-010">cloudstoR 0.1.0<small>2021-08-06</small><a class="anchor" aria-label="anchor" href="#cloudstor-010"></a></h2>
