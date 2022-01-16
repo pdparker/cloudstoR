@@ -22,7 +22,8 @@ cloud_get(
 
 \item{password}{Cloudstor password}
 
-\item{open_file}{If TRUE, open the file using rio. Else, returns the file path}
+\item{open_file}{If TRUE, open the file using rio.
+Else, returns the file path}
 
 \item{\dots}{pass additional arguments to \code{rio::import()}}
 }

@@ -15,7 +15,7 @@ downloads](https://cranlogs.r-pkg.org/badges/last-month/cloudstoR?color=blue)](h
 <!-- badges: end -->
 
 The goal of `cloudstoR` is to simplify accessing data stored on
-[cloudstor](https://cloudstor.aarnet.edu.au/) via their WebDAV
+[Cloudstor](https://cloudstor.aarnet.edu.au/) via their WebDAV
 interface. You can use `cloudstoR` to download or upload files, or check
 the contents of directories.
 
@@ -35,6 +35,9 @@ Or install the development version from
 # install.packages("devtools")
 devtools::install_github("pdparker/cloudstoR")
 ```
+
+For additional support for the package, check the [pkgdown
+site](https://pdparker.github.io/cloudstoR/).
 
 ## Setup
 

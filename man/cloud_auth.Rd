@@ -10,7 +10,7 @@ cloud_auth(reset_keys = FALSE)
 \item{reset_keys}{Override existing keys.}
 }
 \value{
-Nothing. Keys are stored in Keyring.
+Nothing. Keys are stored in keyring.
 }
 \description{
 \code{cloud_auth()} gets the user's credentials and stores them securely in

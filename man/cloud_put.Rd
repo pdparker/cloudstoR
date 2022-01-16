@@ -17,7 +17,7 @@ cloud_put(
 
 \item{path}{The destination on Cloudstor.}
 
-\item{file_name}{Optional. What you want to call the file on cloudstor?
+\item{file_name}{Optional. What you want to call the file on Cloudstor?
 If it is not provided, it is the same as the file name of the local file}
 
 \item{user}{Optional. Your Cloudstor username.}

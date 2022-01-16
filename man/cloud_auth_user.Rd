@@ -10,7 +10,7 @@ cloud_auth_user()
 user id as string.
 }
 \description{
-Used to return a stored cloudstor username, or request the user set one.
+Used to return a stored Cloudstor username, or request the user set one.
 Not a user-facing function.
 }
 \keyword{internal}
