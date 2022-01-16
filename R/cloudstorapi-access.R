@@ -1,10 +1,10 @@
 # Create a package environment
-cloudstoR.env <- new.env(parent = emptyenv())
+cloudstoR.env <- new.env(parent = emptyenv()) # nolint
 
-.onLoad <- function(libname, pkgname) {
+.onLoad <- function(libname, pkgname) { # nolint
   # Set default cloud_address
   op <- options()
-  op.cloudstoR <- list(
+  op.cloudstoR <- list( # nolint
     cloudstoR.cloud_address =
       "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/"
   )
@@ -46,7 +46,7 @@ get_handle <- function(user, password, reset = FALSE) {
   # If authentication has expired, or reset called
   if (
     (difftime(Sys.time(), get("authenticated", envir = cloudstoR.env),
-              units = "min")>5)
+              units = "min") > 5)
     | reset) {
     h <- curl::new_handle(failonerror = TRUE)
     curl::handle_setopt(h, username = user)
@@ -87,7 +87,8 @@ cloud_list <- function(path = "",
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(utils::URLdecode(cloud_address), "/")[[1]][-1:-3],
+  base <- paste(paste("/", strsplit(utils::URLdecode(cloud_address),
+                                    "/")[[1]][-1:-3],
     sep = "",
     collapse = ""
   ), "/", sep = "")
@@ -109,7 +110,8 @@ cloud_list <- function(path = "",
 #' @param user Cloudstor user name
 #' @param password Cloudstor password
 #' @param dest The destination for saving the file.
-#' @param open_file If TRUE, open the file using rio. Else, returns the file path
+#' @param open_file If TRUE, open the file using rio.
+#' Else, returns the file path
 #' @param \dots pass additional arguments to `rio::import()`
 #'
 #' @return The file object or folder path is returned, depending on `open_file`
@@ -158,7 +160,7 @@ cloud_put <- function(local_file,
                       file_name = basename(local_file),
                       user = cloud_auth_user(),
                       password = cloud_auth_pwd()) {
-  cloud_address <- get_cloud_address(file.path(path,file_name))
+  cloud_address <- get_cloud_address(file.path(path, file_name))
   in_path <- path.expand(local_file)
   resp <- httr::PUT(cloud_address,
     body = httr::upload_file(in_path),
@@ -168,10 +170,11 @@ cloud_put <- function(local_file,
   # Alert user on error
   httr::stop_for_status(resp, "upload file")
 
-  if (httr::http_status(resp)$category == "Success"){
+  if (httr::http_status(resp)$category == "Success") {
     msgtype <- switch(as.character(httr::status_code(resp)),
-                      "204" = "updated",
-                      "201" = "added")
+      "204" = "updated",
+      "201" = "added"
+    )
 
     cli::cli_alert_success(sprintf(
       "Success! Your file has been %s.",

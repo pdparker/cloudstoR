@@ -66,7 +66,7 @@ test_that("cloud_get can pass arguements to rio", {
                          # Pass nrows to rio
                          nrows = 1
                          ),
-               test_df[1,])
+               test_df[1, ])
 })
 
 # cloud_meta
