@@ -106,7 +106,7 @@ cloud_put(file_name = 'cloudstoR Tests/mydata.sav',
 If you don’t know the exact file path you want to follow, you can find
 it with `cloud_browse()`.
 
-![Example of `cloud_browse`](docs/cloud_browse%20demo.gif)
+![Example of `cloud_browse`](man/figures/cloud_browse%20demo.gif)
 
 ### Updating credentials
 
