@@ -116,12 +116,12 @@ If you need to delete your credentials (e.g., because you revoke your app passwo
 cloud_auth(reset_keys=TRUE)
 ```
 
-### Using an alternative webdav address
+### Using an alternative WebDAV address
 
-The default webdav address is `https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/`. If your organisation uses a different address, you can set this globally at the top of your script:
+The default WebDAV address is `https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/`. If your organisation uses a different address, you can set this globally at the top of your script:
 
 ```{r, eval=FALSE}
-# Set the global webdav address
+# Set the global WebDAV address
 options(cloudstoR.cloud_address = "https:://my.webdav.address")
 # Check the current value
 getOption("cloudstoR.cloud_address")

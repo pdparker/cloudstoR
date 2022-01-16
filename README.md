@@ -78,10 +78,10 @@ with the `path` argument.
 ``` r
 my_data <- cloud_get(path = 'cloudstoR Tests/mydata1.csv')
 my_data
-#>   A B  C
-#> 1 6 6  9
-#> 2 5 4 10
-#> 3 8 7 10
+#>   A  B  C
+#> 1 3 10  8
+#> 2 5  7  5
+#> 3 5  7 10
 ```
 
 By default, `cloudstoR` will try to open the file using
@@ -129,7 +129,7 @@ cloud_meta(path = 'cloudstoR Tests/mydata1.csv')
 #>                                             file_name
 #> 1 /plus/remote.php/webdav/cloudstoR Tests/mydata1.csv
 #>                                  tag                 file_modified file_size
-#> 1 "4fe343d0c8a6f1ece0cfb5eedc865967" Sat, 18 Sep 2021 07:50:57 GMT        32
+#> 1 "9a2a8fdd58a6c2746cd65b7dace6115c" Sun, 16 Jan 2022 05:42:52 GMT        36
 ```
 
 ### Updating credentials
@@ -141,15 +141,15 @@ app password), you can restore them by calling `cloud_auth()` directly:
 cloud_auth(reset_keys=TRUE)
 ```
 
-### Using an alternative webdav address
+### Using an alternative WebDAV address
 
-The default webdav address is
+The default WebDAV address is
 `https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/`. If your
 organisation uses a different address, you can set this globally at the
 top of your script:
 
 ``` r
-# Set the global webdav address
+# Set the global WebDAV address
 options(cloudstoR.cloud_address = "https:://my.webdav.address")
 # Check the current value
 getOption("cloudstoR.cloud_address")

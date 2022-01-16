@@ -36,8 +36,8 @@ get_cloud_address <- function(path) {
 #'
 #' Return a handle for CURL to use. Not a user facing function
 #'
-#' @param user cloudstor username
-#' @param password cloudstor password
+#' @param user Cloudstor username
+#' @param password Cloudstor password
 #' @param reset remove the existing authentication and handle
 #'
 #' @return curl handle object
@@ -146,7 +146,7 @@ cloud_get <- function(path,
 #'
 #' @param local_file Where the file is located on your computer.
 #' @param path The destination on Cloudstor.
-#' @param file_name Optional. What you want to call the file on cloudstor?
+#' @param file_name Optional. What you want to call the file on Cloudstor?
 #' If it is not provided, it is the same as the file name of the local file
 #' @param user Optional. Your Cloudstor username.
 #' @param password Optional. Your Cloudstor password.
