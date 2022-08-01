@@ -55,35 +55,50 @@ and read into R using rio, or optionally the file path is returned.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cloud_get</span><span class="op">(</span>
-  <span class="va">path</span>,
-  dest <span class="op">=</span> <span class="cn">NULL</span>,
-  user <span class="op">=</span> <span class="fu"><a href="cloud_auth_user.html">cloud_auth_user</a></span><span class="op">(</span><span class="op">)</span>,
-  password <span class="op">=</span> <span class="fu"><a href="cloud_auth_pwd.html">cloud_auth_pwd</a></span><span class="op">(</span><span class="op">)</span>,
-  open_file <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cloud_get</span><span class="op">(</span></span>
+<span>  <span class="va">path</span>,</span>
+<span>  dest <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  user <span class="op">=</span> <span class="fu"><a href="cloud_auth_user.html">cloud_auth_user</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  password <span class="op">=</span> <span class="fu"><a href="cloud_auth_pwd.html">cloud_auth_pwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  open_file <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>The path to file or folder.</p></dd>
+
+
 <dt>dest</dt>
 <dd><p>The destination for saving the file.</p></dd>
+
+
 <dt>user</dt>
 <dd><p>Cloudstor user name</p></dd>
+
+
 <dt>password</dt>
 <dd><p>Cloudstor password</p></dd>
+
+
 <dt>open_file</dt>
 <dd><p>If TRUE, open the file using rio.
 Else, returns the file path</p></dd>
+
+
 <dt>...</dt>
 <dd><p>pass additional arguments to <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The file object or folder path is returned, depending on <code>open_file</code></p>
+    
+
+<p>The file object or folder path is returned, depending on <code>open_file</code></p>
+
+
     </div>
 
   </div>
@@ -98,7 +113,7 @@ Else, returns the file path</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
