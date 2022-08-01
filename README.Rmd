@@ -53,9 +53,11 @@ The first time you use a `cloud_*` function, `cloudstoR` will prompt you to stor
 
 ```{r, eval=FALSE}
 library(cloudstoR)
-my_data <- cloud_get(path = 'cloudstoR Tests/mydata1.csv',
-                     username = cloudstor_username,
-                     password = cloudstor_appPassword)
+my_data <- cloud_get(
+  path = "cloudstoR Tests/mydata1.csv",
+  user = cloudstor_username,
+  password = cloudstor_appPassword
+)
 ```
 
 ### Getting a list of files
@@ -63,7 +65,7 @@ my_data <- cloud_get(path = 'cloudstoR Tests/mydata1.csv',
 To retrieve a list of files in a folder, use `cloud_list()`. The `path` argument specifies the folder to return.
 
 ```{r}
-cloud_list(path = 'cloudstoR Tests')
+cloud_list(path = "cloudstoR Tests")
 ```
 
 ### Getting a specific file
@@ -71,16 +73,18 @@ cloud_list(path = 'cloudstoR Tests')
 To retrieve a file use `cloud_get()`, and provide the path to the file with the `path` argument.
 
 ```{r}
-my_data <- cloud_get(path = 'cloudstoR Tests/mydata1.csv')
+my_data <- cloud_get(path = "cloudstoR Tests/mydata1.csv")
 my_data
 ```
 
 By default, `cloudstoR` will try to open the file using [`rio`](https://github.com/leeper/rio) and return a data.frame. The temporary version of the file is deleted once it is read into memory. If you want to use a different package to open the file, or you just want to download and keep the file without opening it, set `open_file = FALSE` to return a file path instead. 
 
 ```{r}
-my_path <- cloud_get(path = 'cloudstoR Tests/mydata1.csv',
-                     dest = "~/mydata1.csv",
-                     open_file = FALSE)
+my_path <- cloud_get(
+  path = "cloudstoR Tests/mydata1.csv",
+  dest = "~/mydata1.csv",
+  open_file = FALSE
+)
 file.exists(my_path)
 ```
 
@@ -90,9 +94,11 @@ file.exists(my_path)
 To upload a file, use `cloud_put()`. You need to provide the path to the saved file (`local_file`), and the path to save the file on Cloudstor (`path`). You can optionally provide a name for the file (`file_name`), otherwise the file name of the local file is used.
 
 ```{r, eval=FALSE}
-cloud_put(local_file = '~/datatosave.sav',
-          path = 'additional/path/to/folder',
-          file_name = 'mydata.sav',)
+cloud_put(
+  local_file = "~/datatosave.sav",
+  path = "additional/path/to/folder",
+  file_name = "mydata.sav",
+)
 ```
 
 ### Navigating the folder tree
@@ -106,7 +112,7 @@ If you don't know the exact file path you want to follow, you can find it with `
 You can view meta-data for a file or folder with `cloud_meta()`. This can be especially useful for checking if a file has been modified.
 
 ```{r}
-cloud_meta(path = 'cloudstoR Tests/mydata1.csv')
+cloud_meta(path = "cloudstoR Tests/mydata1.csv")
 ```
 
 
@@ -115,7 +121,7 @@ cloud_meta(path = 'cloudstoR Tests/mydata1.csv')
 If you need to delete your credentials (e.g., because you revoke your app password), you can restore them by calling `cloud_auth()` directly:
 
 ```{r, eval=FALSE}
-cloud_auth(reset_keys=TRUE)
+cloud_auth(reset_keys = TRUE)
 ```
 
 ### Using an alternative WebDAV address
