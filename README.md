@@ -58,9 +58,11 @@ providing a username and password for each function call.
 
 ``` r
 library(cloudstoR)
-my_data <- cloud_get(path = 'cloudstoR Tests/mydata1.csv',
-                     username = cloudstor_username,
-                     password = cloudstor_appPassword)
+my_data <- cloud_get(
+  path = "cloudstoR Tests/mydata1.csv",
+  user = cloudstor_username,
+  password = cloudstor_appPassword
+)
 ```
 
 ### Getting a list of files
@@ -69,7 +71,7 @@ To retrieve a list of files in a folder, use `cloud_list()`. The `path`
 argument specifies the folder to return.
 
 ``` r
-cloud_list(path = 'cloudstoR Tests')
+cloud_list(path = "cloudstoR Tests")
 #> [1] "Another Folder/" "mydata1.csv"     "mydata2.csv"
 ```
 
@@ -79,12 +81,12 @@ To retrieve a file use `cloud_get()`, and provide the path to the file
 with the `path` argument.
 
 ``` r
-my_data <- cloud_get(path = 'cloudstoR Tests/mydata1.csv')
+my_data <- cloud_get(path = "cloudstoR Tests/mydata1.csv")
 my_data
-#>   A  B  C
-#> 1 3 10  8
-#> 2 5  7  5
-#> 3 5  7 10
+#>   A  B C
+#> 1 3  9 2
+#> 2 2  5 9
+#> 3 7 10 3
 ```
 
 By default, `cloudstoR` will try to open the file using
@@ -95,9 +97,11 @@ to download and keep the file without opening it, set
 `open_file = FALSE` to return a file path instead.
 
 ``` r
-my_path <- cloud_get(path = 'cloudstoR Tests/mydata1.csv',
-                     dest = "~/mydata1.csv",
-                     open_file = FALSE)
+my_path <- cloud_get(
+  path = "cloudstoR Tests/mydata1.csv",
+  dest = "~/mydata1.csv",
+  open_file = FALSE
+)
 file.exists(my_path)
 #> [1] TRUE
 ```
@@ -110,9 +114,11 @@ saved file (`local_file`), and the path to save the file on Cloudstor
 otherwise the file name of the local file is used.
 
 ``` r
-cloud_put(local_file = '~/datatosave.sav',
-          path = 'additional/path/to/folder',
-          file_name = 'mydata.sav',)
+cloud_put(
+  local_file = "~/datatosave.sav",
+  path = "additional/path/to/folder",
+  file_name = "mydata.sav",
+)
 ```
 
 ### Navigating the folder tree
@@ -128,11 +134,11 @@ You can view meta-data for a file or folder with `cloud_meta()`. This
 can be especially useful for checking if a file has been modified.
 
 ``` r
-cloud_meta(path = 'cloudstoR Tests/mydata1.csv')
+cloud_meta(path = "cloudstoR Tests/mydata1.csv")
 #>                                             file_name
 #> 1 /plus/remote.php/webdav/cloudstoR Tests/mydata1.csv
 #>                                  tag                 file_modified file_size
-#> 1 "9a2a8fdd58a6c2746cd65b7dace6115c" Sun, 16 Jan 2022 05:42:52 GMT        36
+#> 1 "095d3de8121db760bef190fed3369278" Wed, 02 Mar 2022 22:27:13 GMT        35
 ```
 
 ### Updating credentials
@@ -141,7 +147,7 @@ If you need to delete your credentials (e.g., because you revoke your
 app password), you can restore them by calling `cloud_auth()` directly:
 
 ``` r
-cloud_auth(reset_keys=TRUE)
+cloud_auth(reset_keys = TRUE)
 ```
 
 ### Using an alternative WebDAV address
