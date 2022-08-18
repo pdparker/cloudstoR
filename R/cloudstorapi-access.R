@@ -11,9 +11,11 @@ cloudstoR.env <- new.env(parent = emptyenv()) # nolint
   toset <- !(names(op.cloudstoR) %in% names(op))
   if (any(toset)) options(op.cloudstoR[toset])
 
-  assign("authenticated",
-         Sys.time() - 5 * 60, # Starts requiring trigger
-         cloudstoR.env)
+  assign(
+    "authenticated",
+    Sys.time() - 5 * 60, # Starts requiring trigger
+    cloudstoR.env
+  )
 
   invisible()
 }
@@ -46,8 +48,9 @@ get_handle <- function(user, password, reset = FALSE) {
   # If authentication has expired, or reset called
   if (
     (difftime(Sys.time(), get("authenticated", envir = cloudstoR.env),
-              units = "min") > 5)
-    | reset) {
+      units = "min"
+    ) > 5) |
+      reset) {
     h <- curl::new_handle(failonerror = TRUE)
     curl::handle_setopt(h, username = user)
     curl::handle_setopt(h, password = password)
@@ -68,7 +71,7 @@ get_handle <- function(user, password, reset = FALSE) {
 #' cloud_list
 #'
 #' @description
-#' `cloud_list()` returns a list of the files located in a folder.
+#' Return a list of the files located in a folder.
 #'
 #' @param path The path to file or folder.
 #' @param user Cloudstor user name.
@@ -87,10 +90,12 @@ cloud_list <- function(path = "",
   text <- rawToChar(response$content)
   doc <- XML::xmlParse(text, asText = TRUE)
   # calculate relative paths
-  base <- paste(paste("/", strsplit(utils::URLdecode(cloud_address),
-                                    "/")[[1]][-1:-3],
-    sep = "",
-    collapse = ""
+  base <- paste(paste("/", strsplit(
+    utils::URLdecode(cloud_address),
+    "/"
+  )[[1]][-1:-3],
+  sep = "",
+  collapse = ""
   ), "/", sep = "")
   result <- unlist(
     XML::xpathApply(doc, "//d:response/d:href", function(node) {
@@ -103,7 +108,7 @@ cloud_list <- function(path = "",
 #' cloud_get
 #'
 #' @description
-#' `cloud_list()` downloads a file from a Cloudstor folder. The file is opened
+#' Download a file from a Cloudstor folder. The file is opened
 #' and read into R using rio, or optionally the file path is returned.
 #'
 #' @param path The path to file or folder.
@@ -143,7 +148,7 @@ cloud_get <- function(path,
 #' cloud_put
 #'
 #' @description
-#' `cloud_put()` saves a file to Cloudstor. If the file already exists, it is
+#' Save a file to Cloudstor. If the file already exists, it is
 #' replaced.
 #'
 #' @param local_file Where the file is located on your computer.
@@ -181,14 +186,13 @@ cloud_put <- function(local_file,
       msgtype
     ))
   }
-
 }
 
 
 #' cloud_meta
 #'
 #' @description
-#' `cloud_meta()` returns the metadata for a file or folder. This can be useful
+#' Return the metadata for a file or folder. This can be useful
 #' for checking if a file has been modified.
 #'
 #' @param path The path to file or folder.
@@ -251,10 +255,10 @@ cloud_meta <- function(path = "",
 #' cloud_browse
 #'
 #' @description
-#' `cloud_browse()` lets you navigate the folder tree interactively. This is
-#' useful for finding a file or folder path which can then be used in
-#' `cloud_get()` or `cloud_put()`. This function is only intended to be used
-#' interactively - you should not use this function programmatically.
+#' Navigate the folder tree interactively. This is useful for finding a file or
+#' folder path which can then be used in `cloud_get()` or `cloud_put()`.
+#' This function is only intended to be used interactively - you should not use
+#' this function programmatically.
 #'
 #' When you call `cloud_browse()` you are given a list of files and folders
 #' (either at the top-level, or from the provided `path`). You provide the
@@ -281,9 +285,11 @@ cloud_browse <- function(path = "",
   new_path <- path
 
   while (choice != 0) {
-    opts <- cloud_list(path = new_path,
-                       user = user,
-                       password = password)
+    opts <- cloud_list(
+      path = new_path,
+      user = user,
+      password = password
+    )
 
     if (new_path != "") {
       # Append only if not at the top of the tree
@@ -315,7 +321,7 @@ cloud_browse <- function(path = "",
       } else {
         # Append the option to the existing path
         if (nchar(new_path) > 0 &
-            substr(new_path, nchar(new_path), nchar(new_path)) != "/") {
+          substr(new_path, nchar(new_path), nchar(new_path)) != "/") {
           new_path <- paste(new_path, opt_chosen, sep = "/")
         } else {
           new_path <- paste(new_path, opt_chosen, sep = "")
@@ -325,7 +331,7 @@ cloud_browse <- function(path = "",
 
     # If the selection is a file, force exit
     if (nchar(new_path) > 0 &
-        substr(new_path, nchar(new_path), nchar(new_path)) != "/") {
+      substr(new_path, nchar(new_path), nchar(new_path)) != "/") {
       choice <- 0
     }
     first_run <- FALSE
