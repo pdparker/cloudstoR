@@ -6,7 +6,11 @@
 #'
 #' @return encoded url as string
 #' @keywords internal
-get_cloud_address <- function(path) {
+get_cloud_address <- function(path, fetch_type = "path") {
+  if (fetch_type == "url") {
+    return(utils::URLencode(getOption("cloudstoR.cloud_address_public")))
+  }
+
   cloud_address <- paste0(getOption("cloudstoR.cloud_address"), path)
   cloud_address <- utils::URLencode(cloud_address)
   return(cloud_address)

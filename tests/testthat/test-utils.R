@@ -8,6 +8,16 @@ test_that("get_cloud_address generates correct URLs", {
     get_cloud_address("newpath/newfile.sav"),
     "https://cloudstor.aarnet.edu.au/plus/remote.php/webdav/newpath/newfile.sav"
   )
+
+  expect_equal(
+    get_cloud_address(fetch_type = "url"),
+    "https://cloudstor.aarnet.edu.au/plus/public.php/webdav/"
+  )
+
+  expect_equal(
+    get_cloud_address("testpath", fetch_type = "url"),
+    "https://cloudstor.aarnet.edu.au/plus/public.php/webdav/"
+  )
 })
 
 test_that("path_or_url correctly detects urls and paths", {
