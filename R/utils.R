@@ -49,3 +49,21 @@ get_handle <- function(user, password, reset = FALSE, save = TRUE) {
 
   return(h)
 }
+
+#' Check if using a file path or a URL
+#'
+#' Checks if the string provided to `path` in the `cloud_*` functions are a
+#' Cloudstor path or a URL (indicating a public file or folder).
+#' Not a user facing function.
+#'
+#' @param item The user-provided string.
+#'
+#' @return "path" or "url"
+#' @keywords internal
+path_or_url <- function(item) {
+  if (startsWith(item, "https://")) {
+    return("url")
+  }
+
+  return("path")
+}
