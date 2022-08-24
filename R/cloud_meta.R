@@ -7,15 +7,34 @@
 #' @param path The path to file or folder.
 #' @param user Your Cloudstor username
 #' @param password Your Cloudstor password
+#' @param fetch_type One of `c("path", "url")`, for if `path` is a private path
+#' or public URL.
 #'
 #' @return A data.frame of the file and folder metadata is returned.
 #' @export
 cloud_meta <- function(path = "",
-                       user = cloud_auth_user(),
-                       password = cloud_auth_pwd()) {
-  cloud_address <- get_cloud_address(path)
+                       user = NULL,
+                       password = NULL,
+                       fetch_type = NULL) {
+  if (is.null(fetch_type)) fetch_type <- path_or_url(path)
+  cloud_address <- get_cloud_address(path, fetch_type)
+
+  # Setup the user/password
+  if (fetch_type == "path") {
+    if (is.null(user)) user <- cloud_auth_user()
+    if (is.null(password)) password <- cloud_auth_pwd()
+    reset <- FALSE
+    save <- TRUE
+  }
+  if (fetch_type == "url") {
+    user <- basename(path)
+    if (is.null(password)) password <- ""
+    reset <- TRUE
+    save <- FALSE
+  }
+
   # fetch directory listing via curl and parse XML response
-  h <- get_handle(user, password)
+  h <- get_handle(user, password, reset, save)
   curl::handle_setopt(h, customrequest = "PROPFIND")
   response <- curl::curl_fetch_memory(cloud_address, h)
   text <- rawToChar(response$content)

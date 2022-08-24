@@ -71,3 +71,47 @@ path_or_url <- function(item) {
 
   return("path")
 }
+
+
+#' Check if metadata indicates a file or folder
+#'
+#' Used internally to check if a path should be treated as a folder or a single
+#' file.
+#'
+#' @param metadata metadata as returned by [cloud_meta()].
+#'
+#' @return One of c("folder", "file")
+#' @keywords internal
+file_or_folder <- function(metadata) {
+  if (nrow(metadata) > 1) {
+    return("folder")
+  }
+
+  if (nchar(metadata$tag) > 15) {
+    return("file")
+  }
+
+  return("folder")
+}
+
+
+#' Generate the path for saving files
+#'
+#' Used internally to determine where files should be saved.
+#'
+#' @param dest The optional destination provided by the user.
+#' @param path The path to the file on cloudstor.
+#'
+#' @return A file path that can be used for saving files.
+#' @keywords internal
+make_dest_path <- function(dest, path = NULL) {
+  if (is.null(dest) & !is.null(path)) {
+    return(file.path(tempdir(), basename(path)))
+  }
+
+  if (is.null(dest)) {
+    return(file.path(tempfile()))
+  }
+
+  return(file.path(dest))
+}
