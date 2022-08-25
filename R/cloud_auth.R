@@ -12,8 +12,8 @@ cloud_auth <- function(reset_keys = FALSE) {
   current_keys <- keyring::key_list()$service
 
   if ((!reset_keys) &
-    ("Cloudstor_USER" %in% current_keys) &
-    ("Cloudstor_PWD" %in% current_keys)) {
+    ("CLOUDSTOR_USER" %in% current_keys) &
+    ("CLOUDSTOR_PWD" %in% current_keys)) {
     # No reason to run script
     return(NULL)
   }

@@ -24,11 +24,12 @@ BugReports: https://github.com/pdparker/cloudstoR/issues
 License: GPL (>= 3)
 Suggests: 
     rstudioapi,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Imports: 
     curl,
     cli,
