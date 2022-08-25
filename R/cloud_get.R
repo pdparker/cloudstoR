@@ -54,15 +54,18 @@ cloud_get <- function(path,
 #' @param password Cloudstor password
 #' @param open_file If TRUE, open the file using rio.
 #' Else, returns the file path.
+#' @param reset Passed to [get_handle()]
+#' @param save Passed to [get_handle()]
 #' @param \dots pass additional arguments to `rio::import()`
 #'
 #' @return The file object or folder path is returned, depending on `open_file`
 #' @keywords internal
 #' @seealso [cloud_get_url()]
 cloud_get_path <- function(cloud_address,
-                           path, dest, user, password, open_file, ...) {
+                           path, dest, user, password, open_file,
+                           reset = FALSE, save = TRUE, ...) {
   p <- make_dest_path(dest, path)
-  h <- get_handle(user, password)
+  h <- get_handle(user, password, reset, save)
   curl::curl_download(cloud_address, p, handle = h)
   if (open_file) {
     d <- rio::import(p, ...)
@@ -76,7 +79,8 @@ cloud_get_path <- function(cloud_address,
 
 #' Get file(s) from a public URL
 #'
-#' FUNCTION_DESCRIPTION
+#' The engine function for [cloud_get()], when the provided path is a public
+#' URL. Not intended to be invoked directly.
 #'
 #' @param cloud_address Address to use for fetching.
 #' @param url The url to the file or folder.
@@ -96,18 +100,22 @@ cloud_get_url <- function(cloud_address,
   # Get the structure
   url_meta <- cloud_meta(url, password = password, fetch_type = "url")
   url_type <- file_or_folder(url_meta)
+  reset <- TRUE
+  save <- FALSE
 
   if (url_type == "file" & is.null(dest) & open_file) {
+    open_file <- FALSE
     cli::cli_warn(
       "Cannot detect file type & cannot open file. File path returned instead."
     )
-    open_file <- FALSE
   }
 
   # Simplest case: the url is a single file
   if (url_type == "file") {
     return(
-      cloud_get_path(cloud_address, NULL, dest, user, password, open_file, ...)
+      cloud_get_path(
+        cloud_address, NULL, dest, user, password, open_file, reset, save, ...
+      )
     )
   }
 
@@ -118,12 +126,12 @@ cloud_get_url <- function(cloud_address,
   }
 
   if (url_type == "folder" & open_file) {
+    open_file <- FALSE
     cli::cli_warn(
       "Argument `open_file` ignored: cannot open a folder.
       List of file paths returned instead.
       Silence this warning with `open_file = FALSE`"
     )
-    open_file <- FALSE
   }
 
   files_to_fetch <- url_meta$file_name[url_meta$file_name != ""]
@@ -148,7 +156,8 @@ cloud_get_url <- function(cloud_address,
     file_dest <- file.path(dest, filename)
     file_cloud_address <- utils::URLencode(paste0(cloud_address, filename))
     file_locations[[i]] <- cloud_get_path(
-      file_cloud_address, NULL, file_dest, user, password, open_file
+      file_cloud_address, NULL, file_dest, user, password, open_file, reset,
+      save
     )
   }
 

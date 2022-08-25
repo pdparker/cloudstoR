@@ -2,7 +2,7 @@
 test_that("cloud_put can store a file", {
   skip_if_no_envs()
   skip_if_offline()
-  test_file <- create_testdf(store = TRUE)
+  test_file <- create_testenv(store = TRUE)
 
   # This fails if an error is returned
   expect_error(
